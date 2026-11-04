@@ -1,0 +1,12 @@
+﻿[
+    {
+        "file":  "data/raw/monthly_ev_fleet_impact.csv",
+        "bytes":  4688,
+        "sha256":  "7d134be1c790e55407a20714ada9142bdf592778fead1eb07770cfe76e79ec72"
+    },
+    {
+        "file":  "data/raw/monthly_ev_sales.csv",
+        "bytes":  7673802,
+        "sha256":  "650d558a761832469506e56fe0703395464f66db03cdce5070109cc2756e66e9"
+    }
+]

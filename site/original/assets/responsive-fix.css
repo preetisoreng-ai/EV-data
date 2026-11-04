@@ -1,0 +1,13 @@
+body { overflow-x: hidden; }
+.hero-grid > *, .split-grid > *, .section-head > * { min-width: 0; }
+.bar-fill {
+  display: block;
+  min-width: 3px;
+  background-color: #4056d6;
+  animation: none;
+}
+.bar-row:first-child .bar-fill { background-color: #d96a0c; }
+@media (max-width: 800px) {
+  .wrap { width: calc(100% - 32px); }
+  .dek, .hero-note p { overflow-wrap: break-word; }
+}

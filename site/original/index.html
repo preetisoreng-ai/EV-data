@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" class="theme-data radius-round-2">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="An exploratory view of where the global EV fleet is already changing energy demand." />
+  <title>Where EV impact is concentrated</title>
+  <link rel="stylesheet" href="assets/data.css" />
+  <link rel="stylesheet" href="assets/original.css" />
+  <link rel="stylesheet" href="assets/responsive-fix.css" />
+  <link rel="stylesheet" href="../shared/topbar.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar"><a class="wordmark" href="../data-story/index.html" aria-label="EV transition story home"><span class="mark" aria-hidden="true">E</span> EV transition</a><nav aria-label="EV transition pages"><details class="version-menu"><summary><span>Original</span><svg class="version-menu-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M26.7 12.7 16.7 22.7a1 1 0 0 1-1.4 0l-10-10a1 1 0 0 1 1.4-1.4l9.3 9.3 9.3-9.3a1 1 0 0 1 1.4 1.4Z"/></svg></summary><div class="version-menu-panel"><a href="../data-story/index.html">Data story</a><a class="active" aria-current="page" href="../original/index.html">Original</a><a href="../tested/index.html">Pressure tested</a><a href="../dashboard/index.html">Dashboard</a></div></details></nav></header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Original analysis · global snapshot</p>
+          <h1><span data-bind="chinaFleetShare">57.2</span>% of the world’s EV fleet is in one market.</h1>
+          <p class="dek">The dataset reports a global fleet of <strong data-bind="worldFleet">90.6 million</strong> vehicles. China accounts for more than half of that stock—and a similar share of the oil displacement associated with it.</p>
+        </div>
+        <aside class="hero-note" aria-label="Interpretation note">
+          <span class="note-label">What this means</span>
+          <p>EV adoption is spreading, but today’s energy impact remains highly concentrated.</p>
+          <span class="note-label">What it does not mean</span>
+          <p>These files do not establish which policies caused adoption or document the impact model.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="stat-band" aria-label="World fleet impact">
+      <div class="wrap stat-grid">
+        <article><span class="stat" data-bind="worldFleet">90.6m</span><span class="stat-label">EVs in the supplied World row</span></article>
+        <article><span class="stat" data-bind="worldOil">525.1m</span><span class="stat-label">barrels of oil equivalent displaced per year</span></article>
+        <article><span class="stat" data-bind="worldPower">235.6</span><span class="stat-label">TWh of fleet electricity demand per year</span></article>
+      </div>
+    </section>
+
+    <section class="section wrap" id="concentration">
+      <div class="section-head">
+        <div><p class="eyebrow">Concentration</p><h2>Five countries hold nearly four in five EVs.</h2></div>
+        <p>The five largest country fleets account for <strong data-bind="top5FleetShare">77.7%</strong> of the World total. Regional rows are excluded to avoid counting EU markets twice.</p>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title"><h3>Largest EV fleets</h3><span>Latest available month, 2026</span></div>
+        <div id="fleetChart" class="bar-chart" role="img" aria-label="Ranked bars showing the largest electric vehicle fleets"></div>
+      </div>
+    </section>
+
+    <section class="section split-section" aria-labelledby="scale-title">
+      <div class="wrap split-grid">
+        <div>
+          <p class="eyebrow">Scale and momentum</p>
+          <h2 id="scale-title">A large fleet does not guarantee fast current adoption.</h2>
+          <p class="body-copy">China combines both: 51.8 million EVs and a 67% share of new registrations in September 2026. The United States has the second-largest fleet, but its latest monthly share is 8.2%. Norway is the reverse: a smaller stock and an almost entirely electric new-car market.</p>
+        </div>
+        <div class="comparison-list" id="comparisonList" aria-label="Fleet scale and latest electric vehicle sales share"></div>
+      </div>
+    </section>
+
+    <section class="section wrap" id="momentum">
+      <div class="section-head">
+        <div><p class="eyebrow">Monthly momentum</p><h2>The next wave is moving at different speeds.</h2></div>
+        <p>Choose a market to see the monthly share of registrations that were battery-electric or plug-in hybrid. Monthly values can be volatile, so this is direction—not a forecast.</p>
+      </div>
+      <div class="chart-card">
+        <div class="market-controls" id="marketControls" aria-label="Select market"></div>
+        <div class="line-chart-wrap">
+          <div id="shareChart" class="line-chart" role="img" aria-label="Monthly electric vehicle share of registrations"></div>
+          <div class="chart-summary" id="chartSummary" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section method" id="method">
+      <div class="wrap method-grid">
+        <div><p class="eyebrow">Method and limits</p><h2>Two views of the transition.</h2></div>
+        <div>
+          <p><strong>Fleet impact</strong> is a latest-available snapshot. Dates range from June to October 2026; most are September. Country rankings exclude World and EU aggregate rows.</p>
+          <p><strong>Sales momentum</strong> uses the supplied monthly “Electric vehicle (BEV+PHEV)” registration share. Missing registrations are not treated as zero.</p>
+          <p><strong>Important limit:</strong> the files do not identify their publisher or document how electricity demand and oil displacement were estimated. Those fields are presented as reported estimates, not independently verified causal effects.</p>
+          <p class="source">Sources: uploaded `monthly_ev_fleet_impact.csv` and `monthly_ev_sales.csv`. Analysis generated from reproducible local scripts.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap">Original artifact · awaiting review before pressure testing</div></footer>
+  <script src="../../data/processed/original_data.js"></script>
+  <script src="assets/original.js"></script>
+</body>
+</html>
+
