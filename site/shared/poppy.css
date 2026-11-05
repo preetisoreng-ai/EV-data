@@ -1,0 +1,748 @@
+/*
+  Poppy design language for the EV transition pages.
+  Source of truth: design/poppy-design-language.md (reference: design/reference-poppy-infographic.png).
+
+  Loaded LAST on every page, after data.css, the page CSS and topbar.css.
+  It does not edit the generated Data tokens: it re-points the Data semantic tokens
+  to the Poppy palette under html.poppy and restyles page components on top.
+*/
+
+/* ---------- 1. Tokens ---------- */
+html.poppy {
+  --pp-paper: #fbf1de; /* page background: warm cream */
+  --pp-paper-2: #f5e6cb; /* sunken surface: notices, inputs, hover */
+  --pp-sand: #ecd8bc; /* bar tracks, context marks */
+  --pp-line: #dcc6a8; /* hairline dividers */
+  --pp-rule: #2b1d1a; /* heavy section rule */
+  --pp-ink: #2b1d1a; /* headings, numbers */
+  --pp-ink-2: #5e4a42; /* body copy */
+  --pp-muted: #7a655b; /* captions, axis labels (4.9:1 on paper) */
+  --pp-crimson: #a3222b; /* accent: kickers, highlighted values, focus series (6.6:1) */
+  --pp-crimson-dark: #7e1820;
+  --pp-poppy: #e0463a; /* flower red: chart highlight fills */
+  --pp-poppy-light: #f2a08f;
+  --pp-rose: #b8645a; /* secondary series, non-highlighted bars (3.7:1) */
+  --pp-rose-light: #d4a090; /* context series */
+
+  --pp-serif: "Source Serif 4", "Tiempos Headline", Georgia, "Times New Roman", serif;
+  --pp-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --pp-kicker-track: 0.18em;
+
+  /* Data theme semantic tokens re-pointed to Poppy */
+  --color-background-neutral: var(--pp-paper);
+  --color-background-subtle: var(--pp-paper-2);
+  --color-background-primary: var(--pp-crimson);
+  --color-background-primary-pressed: var(--pp-crimson-dark);
+  --color-text-neutral: var(--pp-ink);
+  --color-text-neutral-subtle: var(--pp-muted);
+  --color-text-primary: var(--pp-crimson);
+  --color-text-onprimary: #fff;
+  --color-border-subtle: var(--pp-line);
+  --color-border-neutral: var(--pp-line);
+  --color-border-information: var(--pp-ink);
+  --color-data-visualization-category-1: var(--pp-rose);
+  --color-data-visualization-category-2: var(--pp-crimson);
+  --font-family-body: var(--pp-sans);
+
+  color-scheme: light;
+  background: var(--pp-paper);
+}
+html.poppy body {
+  background: var(--pp-paper);
+  color: var(--pp-ink);
+  font-family: var(--pp-sans);
+}
+html.poppy ::selection {
+  background: var(--pp-poppy-light);
+  color: var(--pp-ink);
+}
+html.poppy :is(a, button, select, input, summary):focus-visible {
+  outline: 2px solid var(--pp-crimson);
+  outline-offset: 3px;
+}
+
+/* ---------- 2. Shared type roles ---------- */
+html.poppy :is(.eyebrow, .kicker, .note-label, .crumb) {
+  font-family: var(--pp-sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: var(--pp-kicker-track);
+  text-transform: uppercase;
+  color: var(--pp-crimson);
+}
+html.poppy :is(.hero h1, .section h2, .method h2, .page-head h1, .display, .statement, .label) {
+  font-family: var(--pp-serif);
+  font-weight: 500;
+  color: var(--pp-ink);
+  letter-spacing: -0.025em;
+}
+/* Numbered section kickers: 01 / CONCENTRATION */
+html.poppy main {
+  counter-reset: pp-section;
+}
+html.poppy main .eyebrow::before {
+  counter-increment: pp-section;
+  content: counter(pp-section, decimal-leading-zero) " / ";
+}
+
+/* ---------- 3. Top bar ---------- */
+html.poppy .topbar {
+  --tb-ink: var(--pp-ink);
+  --tb-muted: var(--pp-muted);
+  --tb-line: var(--pp-line);
+  --tb-brand: var(--pp-crimson);
+  --tb-bg: rgba(251, 241, 222, 0.94);
+  --tb-panel: var(--pp-paper);
+  --tb-hover: var(--pp-paper-2);
+  --tb-selected: var(--pp-sand);
+  font-family: var(--pp-sans);
+}
+html.poppy .topbar .wordmark {
+  color: var(--pp-crimson);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: var(--pp-kicker-track);
+  text-transform: uppercase;
+}
+/* The mark becomes a small poppy: dark centre, red petals */
+html.poppy .topbar .mark {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 0;
+  background:
+    radial-gradient(circle, var(--pp-ink) 0 22%, transparent 24%),
+    radial-gradient(circle at 35% 30%, #f07a68, var(--pp-poppy) 55%, var(--pp-crimson) 100%);
+}
+html.poppy .version-menu summary {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pp-ink-2);
+}
+html.poppy .version-menu-panel {
+  border-radius: 4px;
+  box-shadow: 0 10px 28px rgba(43, 29, 26, 0.12);
+}
+html.poppy .topbar nav .version-menu-panel a {
+  border-radius: 2px;
+  font-weight: 500;
+}
+html.poppy .topbar nav .version-menu-panel a.active {
+  color: var(--pp-crimson);
+}
+
+/* ---------- 4. Shared components ---------- */
+/* Pill toggles (original market controls, tested denominator toggle) */
+html.poppy :is(.market-controls, .toggle) button {
+  border: 1px solid var(--pp-line);
+  background: transparent;
+  color: var(--pp-ink);
+  border-radius: 999px;
+  font-family: var(--pp-sans);
+}
+html.poppy :is(.market-controls, .toggle) button[aria-pressed="true"] {
+  background: var(--pp-crimson);
+  border-color: var(--pp-crimson);
+  color: #fff;
+}
+/* Flat panels: no card boxes, a hairline rule on top */
+html.poppy :is(.chart-card, .card, .range-card, .sales-table, .table-wrap, .kpis article) {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--pp-rule);
+  border-radius: 0;
+  box-shadow: none;
+}
+/* Dotted gridlines and muted axis text */
+html.poppy .grid-line {
+  stroke: var(--pp-muted);
+  stroke-opacity: 0.55;
+  stroke-dasharray: 1 5;
+}
+html.poppy :is(.axis, .axis-text) {
+  fill: var(--pp-muted);
+  font-family: var(--pp-sans);
+}
+/* Footers */
+html.poppy body > footer {
+  background: var(--pp-paper);
+  color: var(--pp-muted);
+  border-top: 1px solid var(--pp-line);
+}
+
+/* ---------- 5. Original ---------- */
+html.poppy .hero {
+  background: var(--pp-paper);
+}
+html.poppy .hero h1 {
+  line-height: 1.02;
+}
+html.poppy .dek {
+  color: var(--pp-ink-2);
+}
+html.poppy .dek strong {
+  color: var(--pp-crimson);
+}
+html.poppy .hero-note {
+  border-left: 1px solid var(--pp-line);
+}
+html.poppy .hero-note p {
+  color: var(--pp-ink-2);
+}
+html.poppy :is(.stat-band, .numbers) {
+  background: transparent;
+  color: var(--pp-ink);
+  border-block: 1px solid var(--pp-rule);
+}
+html.poppy :is(.stat-grid, .number-grid) article {
+  border-right-color: var(--pp-line);
+}
+html.poppy :is(.stat, .number-grid strong) {
+  font-family: var(--pp-sans);
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--pp-ink);
+}
+html.poppy :is(.stat-grid, .number-grid) article:first-child :is(.stat, strong) {
+  color: var(--pp-crimson);
+}
+html.poppy :is(.stat-label, .number-grid span) {
+  color: var(--pp-ink-2);
+  opacity: 1;
+  margin-top: 10px;
+}
+html.poppy :is(.section-head > p, .body-copy) {
+  color: var(--pp-ink-2);
+}
+html.poppy :is(.section-head > p, .body-copy) strong {
+  color: var(--pp-crimson);
+}
+html.poppy .chart-card {
+  padding: 24px 0 0;
+}
+html.poppy .chart-title h3 {
+  font-family: var(--pp-sans);
+  font-weight: 700;
+  color: var(--pp-ink);
+}
+html.poppy .chart-title span {
+  color: var(--pp-muted);
+}
+html.poppy .bar-track {
+  height: 6px;
+  background: var(--pp-sand);
+}
+html.poppy .bar-fill {
+  background-color: var(--pp-rose);
+}
+html.poppy .bar-row:first-child .bar-fill {
+  background-color: var(--pp-crimson);
+}
+html.poppy .bar-value {
+  font-weight: 700;
+  color: var(--pp-ink-2);
+}
+html.poppy .bar-row:first-child :is(.bar-value, .bar-label) {
+  color: var(--pp-crimson);
+  font-weight: 700;
+}
+html.poppy .split-section {
+  background: transparent;
+  border-top: 1px solid var(--pp-rule);
+}
+html.poppy .comparison-list,
+html.poppy .comparison-row {
+  border-color: var(--pp-line);
+}
+html.poppy .comparison-metric {
+  color: var(--pp-muted);
+}
+html.poppy .comparison-metric b {
+  color: var(--pp-ink);
+  font-weight: 800;
+}
+html.poppy .comparison-row:first-child .comparison-metric b {
+  color: var(--pp-crimson);
+}
+html.poppy .series-line {
+  stroke: var(--pp-crimson);
+  stroke-width: 2.5;
+}
+html.poppy .series-area {
+  fill: var(--pp-crimson);
+  opacity: 0.08;
+}
+html.poppy #shareChart circle {
+  fill: var(--pp-crimson);
+}
+html.poppy .chart-summary {
+  border-color: var(--pp-line);
+}
+html.poppy .summary-big {
+  color: var(--pp-crimson);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+html.poppy .summary-label {
+  color: var(--pp-muted);
+}
+html.poppy .method {
+  background: transparent;
+  color: var(--pp-ink);
+  border-top: 1px solid var(--pp-rule);
+}
+html.poppy .method .eyebrow {
+  color: var(--pp-crimson);
+}
+html.poppy .method-grid p {
+  color: var(--pp-ink-2);
+}
+html.poppy .method-grid strong {
+  color: var(--pp-ink);
+}
+html.poppy .method .source {
+  color: var(--pp-crimson) !important;
+  border-top: 1px solid var(--pp-line);
+  padding-top: 20px;
+}
+html.poppy code {
+  font-size: 0.92em;
+  background: var(--pp-paper-2);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+/* ---------- 6. Pressure tested ---------- */
+html.poppy .verdict {
+  border-top-color: var(--pp-line);
+}
+html.poppy .verdict span {
+  color: var(--pp-muted);
+}
+html.poppy .verdict strong {
+  color: var(--pp-crimson);
+  font-family: var(--pp-serif);
+  font-weight: 600;
+  font-size: 24px;
+}
+html.poppy .card {
+  padding: 24px 0 0;
+}
+html.poppy .denom-grid > div {
+  border-left-color: var(--pp-line);
+}
+html.poppy .denom-grid .big {
+  font-weight: 800;
+  color: var(--pp-ink);
+}
+html.poppy #chinaShare {
+  color: var(--pp-crimson);
+}
+html.poppy .denom-grid span:last-child {
+  color: var(--pp-muted);
+}
+html.poppy .concentration {
+  background: var(--pp-sand);
+  height: 36px;
+}
+html.poppy .concentration span:first-child {
+  background: var(--pp-crimson);
+  color: #fff;
+}
+html.poppy .concentration span:last-child {
+  color: var(--pp-ink-2);
+}
+html.poppy .pale {
+  background: transparent;
+  border-top: 1px solid var(--pp-rule);
+}
+html.poppy .impact-grid > div > p:not(.eyebrow) {
+  color: var(--pp-ink-2);
+}
+html.poppy .impact-grid strong {
+  color: var(--pp-crimson);
+}
+/* Min / median / max dot plot */
+html.poppy .range-card {
+  padding: 28px 0 0;
+}
+html.poppy .range-axis {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--pp-ink);
+}
+html.poppy :is(.range-line, .impact-track) {
+  position: relative;
+  height: 2px;
+  background: var(--pp-rose);
+  border-radius: 0;
+  margin: 18px 6px;
+}
+html.poppy :is(.range-line, .impact-track)::before,
+html.poppy :is(.range-line, .impact-track)::after,
+html.poppy :is(.range-line, .impact-track) i {
+  content: "";
+  position: absolute;
+  top: -5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--pp-crimson);
+}
+html.poppy :is(.range-line, .impact-track)::before {
+  left: -6px;
+}
+html.poppy :is(.range-line, .impact-track)::after {
+  right: -6px;
+}
+html.poppy :is(.range-line, .impact-track) i {
+  left: calc(42% - 6px);
+}
+html.poppy .range-card p {
+  color: var(--pp-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+}
+html.poppy .range-card strong {
+  font-family: var(--pp-serif);
+  font-weight: 600;
+  font-size: 22px;
+  color: var(--pp-ink);
+}
+html.poppy .sales-row {
+  border-bottom-color: var(--pp-line);
+}
+html.poppy .sales-row.header {
+  background: transparent;
+  color: var(--pp-crimson);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+html.poppy .checks {
+  background: transparent;
+  color: var(--pp-ink);
+  border-top: 1px solid var(--pp-rule);
+}
+html.poppy .checks .eyebrow {
+  color: var(--pp-crimson);
+}
+html.poppy .check-grid {
+  background: var(--pp-line);
+  border-color: var(--pp-line);
+}
+html.poppy .check-grid article {
+  background: var(--pp-paper);
+}
+html.poppy .check-grid b {
+  color: var(--pp-ink);
+}
+html.poppy .check-grid span {
+  color: var(--pp-ink-2);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+html.poppy .check-grid span.warn {
+  color: var(--pp-crimson);
+}
+html.poppy .check-grid p {
+  color: var(--pp-muted);
+}
+html.poppy .source {
+  color: var(--pp-crimson);
+}
+
+/* ---------- 7. Dashboard ---------- */
+html.poppy .page-head h1 {
+  font-size: clamp(36px, 4.5vw, 56px);
+  letter-spacing: -0.03em;
+}
+html.poppy .page-head > div > p:last-child,
+html.poppy .asof {
+  color: var(--pp-muted);
+}
+html.poppy .asof strong {
+  color: var(--pp-ink);
+}
+html.poppy .tabs {
+  border-bottom-color: var(--pp-line);
+}
+html.poppy .tabs button {
+  color: var(--pp-ink-2);
+}
+html.poppy .tabs button[aria-selected="true"] {
+  color: var(--pp-crimson);
+  border-color: var(--pp-crimson);
+}
+html.poppy :is(.filters, .table-toolbar) label {
+  color: var(--pp-muted);
+}
+html.poppy :is(.filters select, .table-toolbar select, .table-toolbar input) {
+  background-color: var(--pp-paper-2);
+  border: 0;
+  border-bottom: 1px solid var(--pp-rule);
+  border-radius: 0;
+  color: var(--pp-ink);
+}
+html.poppy .filters button,
+html.poppy .downloads a {
+  background: transparent;
+  border: 1px solid var(--pp-line);
+  border-radius: 999px;
+  color: var(--pp-ink);
+}
+html.poppy .filters span {
+  color: var(--pp-muted);
+}
+html.poppy .kpis {
+  gap: 28px;
+}
+html.poppy .kpis article {
+  padding: 18px 0 0;
+}
+html.poppy .kpis span {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pp-crimson);
+}
+html.poppy .kpis strong {
+  font-size: clamp(34px, 3.4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: var(--pp-ink);
+}
+html.poppy .kpis small {
+  color: var(--pp-muted);
+}
+html.poppy .grid {
+  gap: 28px;
+  margin-top: 32px;
+}
+html.poppy .card h2 {
+  font-family: var(--pp-sans);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--pp-ink);
+}
+html.poppy .card p {
+  color: var(--pp-muted);
+}
+html.poppy .info {
+  border-color: var(--pp-line);
+  color: var(--pp-muted);
+}
+html.poppy .monthly {
+  stroke: var(--pp-rose-light);
+  stroke-width: 1.5;
+}
+html.poppy .rolling {
+  stroke: var(--pp-crimson);
+  stroke-width: 3;
+}
+html.poppy .legend {
+  color: var(--pp-ink-2);
+}
+html.poppy .track {
+  height: 6px;
+  background: var(--pp-sand);
+}
+html.poppy .fill {
+  background: var(--pp-rose);
+}
+html.poppy .rank-row:first-child .fill {
+  background: var(--pp-crimson);
+}
+html.poppy .rank-row:first-child {
+  color: var(--pp-crimson);
+  font-weight: 700;
+}
+html.poppy .rank-value {
+  font-weight: 700;
+}
+html.poppy .gauge-value {
+  color: var(--pp-crimson);
+  font-weight: 800;
+}
+html.poppy .gauge-track {
+  height: 2px;
+  background: var(--pp-rose);
+  border-radius: 0;
+  margin: 28px 6px 14px;
+}
+html.poppy .marker {
+  top: -5px;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  border-radius: 50%;
+  background: var(--pp-crimson);
+}
+html.poppy .median {
+  color: var(--pp-muted);
+}
+html.poppy .notice {
+  background: var(--pp-paper-2);
+  border-left: 3px solid var(--pp-crimson);
+}
+html.poppy .notice strong {
+  color: var(--pp-crimson);
+}
+html.poppy .notice span {
+  color: var(--pp-ink-2);
+}
+html.poppy th {
+  background: transparent;
+  color: var(--pp-crimson);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  border-bottom: 1px solid var(--pp-rule);
+}
+html.poppy :is(th, td) {
+  border-bottom-color: var(--pp-line);
+}
+html.poppy td small,
+html.poppy th small {
+  color: var(--pp-muted);
+  letter-spacing: 0.04em;
+}
+html.poppy .tag {
+  background: var(--pp-sand);
+  color: var(--pp-ink-2);
+}
+html.poppy .row-count {
+  color: var(--pp-muted);
+}
+
+/* ---------- 8. Data story (was dark; now cream) ---------- */
+html.poppy.page-story {
+  /* story.css names: --ink = page background, --white = text */
+  --ink: var(--pp-paper);
+  --white: var(--pp-ink);
+  --muted: var(--pp-muted);
+  --hair: var(--pp-line);
+  --lav: var(--pp-crimson);
+  --lime: var(--pp-crimson);
+  --orange: var(--pp-crimson);
+}
+html.poppy.page-story .display {
+  font-size: clamp(60px, 7vw, 112px);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+html.poppy.page-story .lede {
+  color: var(--pp-ink-2);
+}
+html.poppy.page-story .note {
+  color: var(--pp-muted);
+}
+html.poppy.page-story .big {
+  font-weight: 800;
+  letter-spacing: -0.06em;
+}
+html.poppy.page-story .statement,
+html.poppy.page-story .label {
+  letter-spacing: -0.03em;
+}
+html.poppy.page-story .caps-xl {
+  font-family: var(--pp-serif);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: -0.025em;
+  color: var(--pp-ink);
+}
+html.poppy.page-story .small-statement {
+  color: var(--pp-ink-2);
+}
+html.poppy.page-story .caps.lime {
+  color: var(--pp-crimson);
+}
+html.poppy.page-story .links a {
+  color: var(--pp-ink);
+  border-bottom-color: var(--pp-crimson);
+}
+html.poppy.page-story .viz::before {
+  border-color: var(--pp-line);
+  box-shadow:
+    0 0 0 11vh var(--pp-paper-2),
+    0 0 0 calc(11vh + 1px) var(--pp-line);
+}
+html.poppy.page-story .signature {
+  color: var(--pp-muted);
+}
+html.poppy.page-story .axis-top {
+  color: var(--pp-crimson);
+}
+html.poppy.page-story .axis-bottom {
+  color: var(--pp-rose);
+}
+html.poppy.page-story .panel {
+  background: #fffaf0;
+  color: var(--pp-ink);
+  border: 1px solid var(--pp-line);
+  box-shadow: none;
+}
+html.poppy.page-story .panel-number {
+  color: var(--pp-crimson);
+  font-weight: 800;
+}
+html.poppy.page-story .panel-caption {
+  color: var(--pp-ink-2);
+  letter-spacing: 0.14em;
+}
+html.poppy.page-story .market-list i {
+  background: var(--pp-rose);
+}
+html.poppy.page-story .market-list div:first-child i {
+  background: var(--pp-crimson);
+}
+html.poppy.page-story .impact-labels {
+  font-weight: 700;
+  color: var(--pp-ink);
+  font-size: 18px;
+}
+html.poppy.page-story .impact-scale p {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+html.poppy.page-story .impact-scale strong {
+  font-family: var(--pp-serif);
+  font-weight: 500;
+  text-transform: none;
+}
+html.poppy.page-story .mini .pt {
+  fill: var(--pp-poppy);
+}
+html.poppy.page-story .mini .yr {
+  fill: var(--pp-muted);
+}
+html.poppy.page-story .foot a {
+  color: var(--pp-crimson);
+}
+html.poppy.page-story .foot strong {
+  color: var(--pp-ink);
+}
+html.poppy.page-story .swap .caps { margin-top: 18px; }
+
+/* Dashboard KPI row: one continuous rule above and below the whole row */
+html.poppy .kpis {
+  border-top: 1px solid var(--pp-rule);
+  border-bottom: 1px solid var(--pp-rule);
+}
+html.poppy .kpis article {
+  border-top: 0;
+  padding: 20px 0 22px;
+}
+/* Dashboard: no top rule on the "Largest country fleets" panel */
+html.poppy .grid > .card:has(#rankChart) { border-top: 0; }
+/* Dashboard: no top rule on the "EV share of registrations" panel */
+html.poppy .grid > .card:has(#trendChart) { border-top: 0; }
+
+/* Page menu: the top bar and its dropdown sit on the top layer, above every page element */
+html.poppy .topbar { z-index: 1000; }
+html.poppy .version-menu-panel { z-index: 1001; }
