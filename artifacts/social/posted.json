@@ -1,0 +1,51 @@
+{
+  "instagram": {
+    "status": "scheduled by the user in Instagram",
+    "scheduled_for": null,
+    "url": null,
+    "recorded_at": "2026-11-05T04:22:40.405Z",
+    "type": "carousel",
+    "media": [
+      "../video/renders/video-4x5.mp4",
+      "about-flowchart.png (poppy design language)"
+    ],
+    "cover": "covers/cover-4x5.jpg",
+    "caption": "about.txt + 7 hashtags (1446 chars), starts at About this project",
+    "share_to": "Facebook on (public); Threads off",
+    "ai_label": "off",
+    "thumbnail": "to check after it publishes",
+    "story": "left to the user (phone app)"
+  },
+  "linkedin": {
+    "url": "https://www.linkedin.com/feed/update/urn:li:activity:7523963976695656449/",
+    "reply_or_comment_url": null,
+    "posted_at": "2026-11-05T04:27:45.249Z",
+    "visibility": "Anyone",
+    "media": [
+      "../video/renders/video-1x1.mp4"
+    ],
+    "cover": "covers/cover-1x1.jpg (uploaded as video thumbnail)",
+    "description": "caption-linkedin.txt + about.txt + 5 hashtags (1985 chars); appears once in activity",
+    "thumbnail": "feed player 550x550, video fills it edge to edge (no letterbox); the black bars were only in the composer preview",
+    "first_comment": "text typed in the comment box, not posted; the photo button opens a system file picker, so attaching about-flowchart.png and clicking Comment is left to the user"
+  },
+  "x": {
+    "url": "https://x.com/preeti_soreng/status/2118199584690413917",
+    "reply_or_comment_url": "https://x.com/preeti_soreng/status/2118200002589958203",
+    "posted_at": "2026-11-05T04:32:20.762Z",
+    "media": [
+      "../video/renders/video-16x9.mp4",
+      "about-flowchart.png (poppy)"
+    ],
+    "caption": "caption-x.txt (4 hashtags)",
+    "flowchart": "in the post (video + image mix accepted)",
+    "cover": "frame 0 = composed cover (title, 90.6M, poppies)",
+    "thumbnail": "feed shows the video beside the poppy flowchart; appears once on the profile",
+    "reply": "about-x.txt, sent as first reply (appears once)"
+  },
+  "stories": {
+    "status": "left to the user (phone app)",
+    "story_1": "story/story-1-video-9x16.mp4 -> link sticker to live web app",
+    "story_2": "story/story-2-flowchart-9x16.png -> link sticker to preetisoreng.com"
+  }
+}

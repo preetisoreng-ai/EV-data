@@ -1,35 +1,189 @@
 <!doctype html>
-<html lang="en" class="theme-data brand-upi dark">
-<head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="A scroll-driven story about the concentration and momentum of the global EV transition.">
-  <title>EV transition data story</title>
-  <link rel="stylesheet" href="assets/data.css"><link rel="stylesheet" href="assets/story.css"><link rel="stylesheet" href="../shared/topbar.css">
-  <script>document.documentElement.classList.add('js');if(matchMedia('(prefers-reduced-motion: no-preference)').matches)document.documentElement.classList.add('motion')</script>
-</head>
-<body>
-  <a class="skip" href="#story">Skip to story</a>
-  <header class="topbar topbar-dark"><a class="wordmark" href="index.html" aria-label="EV transition story home"><span class="mark" aria-hidden="true">E</span> EV transition</a><nav aria-label="EV transition pages"><details class="version-menu"><summary><span>Data story</span><svg class="version-menu-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M26.7 12.7 16.7 22.7a1 1 0 0 1-1.4 0l-10-10a1 1 0 0 1 1.4-1.4l9.3 9.3 9.3-9.3a1 1 0 0 1 1.4 1.4Z"/></svg></summary><div class="version-menu-panel"><a class="active" aria-current="page" href="../data-story/index.html">Data story</a><a href="../original/index.html">Original</a><a href="../tested/index.html">Pressure tested</a><a href="../dashboard/index.html">Dashboard</a></div></details></nav></header>
-  <div class="progress" aria-hidden="true"><span id="progress"></span></div>
-  <main id="story" class="story">
-    <div class="steps">
-      <section class="step" aria-labelledby="t-hero"><div class="copy"><p class="kicker"><span class="place">Global snapshot</span></p><h1 id="t-hero" class="display">EV<br>FLEET<br>GRAVITY</h1><p class="lede"><span data-bind="worldFleet">90.6</span> million vehicles · 59 country rows</p><p class="note">The world’s EV fleet has a clear center of gravity. Each spoke is one country; longer spokes mean a larger fleet.</p><p class="scroll-cue" aria-hidden="true">Scroll <span>↓</span></p></div></section>
-      <section class="step" aria-labelledby="t-china"><div class="copy"><p class="big lavender" aria-hidden="true"><span data-bind="chinaShare">57.2</span>%</p><h2 id="t-china" class="statement"><span class="sr-only">57.2% </span>of the supplied World EV fleet is in <span class="place">China</span></h2><p class="note">51.8 million vehicles. The alternate country-sum denominator gives 57.9%.</p></div></section>
-      <section class="step" aria-labelledby="t-five"><div class="copy"><p class="kicker"><span class="place">Five markets</span></p><h2 id="t-five" class="label">Share of the global<br>EV fleet</h2><div class="swap"><p class="big lime"><span data-bind="top5Share">77.7</span>%</p><p class="caps lime">Top five fleets</p></div><p class="note">China, United States, Germany, United Kingdom and France. All five snapshots are September 2026.</p></div></section>
-      <section class="step" aria-labelledby="t-sales"><div class="copy"><p class="kicker"><span class="place">Momentum</span></p><h2 id="t-sales" class="label">Rolling 12-month<br>EV sales share</h2><figure class="mini"><svg id="salesLine" viewBox="0 0 320 150" role="img" aria-label="China's monthly EV sales share rises strongly from 2019 through September 2026."></svg></figure><p class="note">Fleet scale is concentrated, but current sales momentum varies sharply across markets.</p></div></section>
-      <section class="step" aria-labelledby="t-impact"><div class="copy"><p class="big orange" aria-hidden="true"><span data-bind="impactMultiple">4.2</span>×</p><h2 id="t-impact" class="statement">spread in reported oil displacement per EV</h2><p class="note"><span data-bind="boeMin">2.277</span> to <span data-bind="boeMax">9.561</span> boe per EV per year. The files do not document the impact method.</p></div></section>
-      <section class="step" aria-labelledby="t-close"><div class="copy"><p class="kicker"><span class="place">What survives</span></p><h2 id="t-close" class="caps lime caps-xl">Scale is concentrated.<br>Mechanism is unresolved.</h2><p class="statement small-statement">Use fleet concentration to understand where effects are largest today. Do not read supplied impact estimates as causal proof or country effectiveness.</p><p class="links"><a href="../dashboard/index.html">Explore the dashboard</a><a href="../tested/index.html">Read the pressure test</a></p></div></section>
-    </div>
-    <div class="viz" aria-label="Animated evidence stage">
-      <figure class="viz-item"><svg id="radialFleet" viewBox="-300 -300 600 600" role="img" aria-label="Radial chart of country EV fleets, dominated by China."></svg></figure>
-      <figure class="viz-item dots-visual"><p class="axis-label axis-top">China</p><p class="axis-label axis-bottom">Rest of world</p><svg id="shareDots" viewBox="0 0 600 600" role="img" aria-label="One hundred dots: 57 represent China's share of the supplied World fleet."></svg></figure>
-      <figure class="viz-item"><svg id="fleetCircles" viewBox="0 0 600 600" role="img" aria-label="Proportional circles compare the top five fleets with the rest of the supplied World total."></svg><figcaption class="disc-caption">White disc = supplied World fleet</figcaption></figure>
-      <figure class="viz-item"><div class="panel trend-panel"><p class="panel-number"><span data-bind="chinaRolling">58.3</span>%</p><p class="panel-caption">China · rolling 12-month EV sales share</p><div class="market-list" id="marketList"></div></div></figure>
-      <figure class="viz-item"><div class="impact-scale"><div class="impact-labels"><span data-bind="boeMin">2.277</span><span data-bind="boeMedian">5.315</span><span data-bind="boeMax">9.561</span></div><div class="impact-track"><i></i></div><p>boe per EV per year</p><strong>Method unavailable</strong></div></figure>
-      <figure class="viz-item"><svg id="radialClose" viewBox="-300 -300 600 600" role="img" aria-label="Radial summary of the five largest EV fleets."></svg></figure>
-      <p class="signature">Supplied EV data<br><em>pressure-tested story</em></p>
-    </div>
-  </main>
-  <footer class="foot"><p><strong>Method.</strong> World and EU aggregates are excluded from country rankings. Fleet snapshots span June–October 2026; all top-five rows are September 2026. Reported energy impacts are supplied estimates, not independently observed effects. <a href="../../workflow/reports/04-story-notes.md">Evidence notes</a>.</p></footer>
-  <script src="../../data/processed/original_data.js"></script><script src="../../data/processed/tested_data.js"></script><script src="assets/story.js"></script>
-</body></html>
+<html lang="en" class="theme-data poppy page-art">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="The shape of the global EV fleet: a data story revealed panel by panel as you scroll."
+    />
+    <title>The shape of the global EV fleet — EV transition data story</title>
+    <link rel="stylesheet" href="../original/assets/data.css" />
+    <link rel="stylesheet" href="../shared/topbar.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap"
+    />
+    <link rel="stylesheet" href="../shared/poppy.css" />
+    <link rel="stylesheet" href="assets/art.css" />
+    <script>
+      document.documentElement.classList.add("js");
+      if (matchMedia("(prefers-reduced-motion: no-preference)").matches)
+        document.documentElement.classList.add("motion");
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#art">Skip to data story</a>
+    <header class="topbar">
+      <a class="wordmark" href="../data-story/index.html" aria-label="EV transition story home"
+        ><span class="mark" aria-hidden="true">E</span> EV transition</a
+      >
+      <nav aria-label="EV transition pages">
+        <details class="version-menu">
+          <summary>
+            <span>Data story</span
+            ><svg class="version-menu-icon" viewBox="0 0 32 32" aria-hidden="true">
+              <path
+                d="M26.7 12.7 16.7 22.7a1 1 0 0 1-1.4 0l-10-10a1 1 0 0 1 1.4-1.4l9.3 9.3 9.3-9.3a1 1 0 0 1 1.4 1.4Z"
+              />
+            </svg>
+          </summary>
+          <div class="version-menu-panel">
+            <a class="active" aria-current="page" href="../data-story/index.html">Data story</a
+            ><a href="../original/index.html">Original</a
+            ><a href="../tested/index.html">Pressure tested</a
+            ><a href="../dashboard/index.html">Dashboard</a>
+          </div>
+        </details>
+      </nav>
+    </header>
+    <div class="art-progress" aria-hidden="true"><span id="artProgress"></span></div>
+
+    <main id="art" class="art">
+      <div class="stage">
+        <div class="art-track" id="track">
+          <section class="panel panel-hero" aria-labelledby="art-title">
+            <div class="hero-top">
+              <p class="kicker">Global EV transition / 2026 snapshot</p>
+              <p class="hero-tags">Fleet · Sales · Reported impact</p>
+            </div>
+            <div class="hero-body">
+              <div class="hero-copy">
+                <h1 id="art-title">The shape of the<br />global EV fleet</h1>
+                <p class="hero-dek">
+                  Five markets account for <strong><span data-bind="top5">77.7</span>%</strong> of
+                  the supplied world fleet.
+                </p>
+              </div>
+              <figure class="hero-art" aria-hidden="true">
+                <svg
+                  id="heroArt"
+                  viewBox="-20 -10 640 600"
+                  preserveAspectRatio="xMidYMax meet"
+                ></svg>
+              </figure>
+            </div>
+            <p class="scroll-cue" aria-hidden="true"><span>Scroll</span><i></i></p>
+          </section>
+
+          <section class="panel panel-stat" aria-labelledby="k1">
+            <p class="kicker" id="k1">Global snapshot</p>
+            <p class="mega"><span data-count="worldFleet">90.6</span>M</p>
+            <p class="stat-sub">vehicles in the supplied World total</p>
+            <p class="stat-note"><span data-bind="countryRows">59</span> country rows</p>
+          </section>
+
+          <section class="panel panel-stat" aria-labelledby="k2">
+            <p class="kicker" id="k2">China’s share</p>
+            <p class="mega crimson"><span data-count="chinaShare">57.2</span>%</p>
+            <p class="stat-sub ink">of the supplied World fleet</p>
+            <p class="stat-note">
+              <span data-bind="chinaCountrySum">57.9</span>% using the sum of country rows.
+            </p>
+            <div
+              class="share-dots"
+              id="shareDots"
+              role="img"
+              aria-label="Out of 100 vehicles in the supplied World fleet, 57 are in China."
+            ></div>
+          </section>
+
+          <section class="panel panel-poppy" aria-labelledby="k3" id="poppyPanel">
+            <p class="kicker" id="k3">Five largest country fleets</p>
+            <p class="panel-dek">
+              Flower centre height and area show fleet size. Ordered by rank, smallest to largest.
+            </p>
+            <figure class="poppy-figure">
+              <svg
+                id="poppyChart"
+                viewBox="0 -60 1000 640"
+                role="img"
+                aria-labelledby="poppyTitle poppyDesc"
+              >
+                <title id="poppyTitle">Five largest country EV fleets as poppies</title>
+                <desc id="poppyDesc">
+                  France 2.8 million, United Kingdom 3.2 million, Germany 3.7 million, United States
+                  8.8 million, China 51.8 million.
+                </desc>
+              </svg>
+              <figcaption>
+                September 2026 snapshots for all five markets. Country rankings exclude World and EU
+                aggregates.
+              </figcaption>
+            </figure>
+          </section>
+
+          <section class="panel panel-sales" aria-labelledby="k4">
+            <p class="kicker" id="k4">Sales momentum</p>
+            <h2 class="panel-title">Rolling 12-month EV sales share</h2>
+            <div class="sales-bars" id="salesBars"></div>
+            <p class="stat-note">China’s share rose strongly from 2019 to September 2026.</p>
+          </section>
+
+          <section class="panel panel-oil" aria-labelledby="k5">
+            <p class="kicker" id="k5">Reported oil displacement</p>
+            <p class="spread crimson"><span data-bind="spread">4.2</span>× spread</p>
+            <div
+              class="dotplot"
+              id="dotplot"
+              role="img"
+              aria-label="Reported oil displaced per EV per year: minimum 2.277, median 5.315, maximum 9.561 barrels of oil equivalent."
+            >
+              <div class="dp-values">
+                <b data-pos="min"></b><b data-pos="median"></b><b data-pos="max"></b>
+              </div>
+              <div class="dp-line">
+                <i data-pos="min"></i><i data-pos="median"></i><i data-pos="max"></i>
+              </div>
+              <div class="dp-labels">
+                <span data-pos="min">Min</span><span data-pos="median">Median</span
+                ><span data-pos="max">Max</span>
+              </div>
+            </div>
+            <p class="stat-note">Barrels of oil equivalent per EV per year</p>
+          </section>
+
+          <section class="panel panel-evidence" aria-labelledby="k6">
+            <p class="kicker">What the evidence supports</p>
+            <h2 class="evidence-title" id="k6">Fleet counts show where EVs are concentrated.</h2>
+            <p class="evidence-copy">
+              The source does not document the oil impact method. The estimates cannot establish
+              causal effects or rank countries by effectiveness.
+            </p>
+          </section>
+
+          <section class="panel panel-end" aria-label="Notes and source">
+            <div class="poppy-mark" aria-hidden="true"></div>
+            <p class="end-note">
+              Fleet snapshots span June–October 2026. Individual fleet labels are rounded.
+            </p>
+            <p class="end-source">
+              Source / supplied monthly EV fleet-impact and sales files · pressure-tested
+              calculations
+            </p>
+            <p class="end-links">
+              <a href="../tested/index.html">Read the pressure test</a
+              ><a href="../dashboard/index.html">Explore the dashboard</a>
+            </p>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <script src="../../data/processed/original_data.js"></script>
+    <script src="../../data/processed/tested_data.js"></script>
+    <script src="assets/art.js"></script>
+  </body>
+</html>

@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="en" class="theme-data poppy">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>The shape of the global EV fleet — infographic</title>
+    <meta
+      name="description"
+      content="Infographic: the global EV fleet's concentration, sales momentum and reported oil displacement, from the locked content of the EV transition series."
+    />
+    <!-- Design language: the site's own tokens and theme (do not restyle here beyond layout) -->
+    <link rel="stylesheet" href="../../site/original/assets/data.css" />
+    <link rel="stylesheet" href="../../site/shared/poppy.css" />
+    <script src="content.js"></script>
+    <style>
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("source-serif-4-latin.woff2") format("woff2");
+        font-weight: 400 600;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+      }
+      body {
+        background: var(--pp-paper);
+        color: var(--pp-ink);
+        font-family: var(--pp-sans);
+        overflow: hidden;
+      }
+      p,
+      h1,
+      h2 {
+        margin: 0;
+      }
+      /* Canvas: the window is the canvas (1920x1080, 1080x1350, 1080x1080, 1080x1920, or any browser size). */
+      .sheet {
+        position: absolute;
+        inset: 0;
+        padding: var(--pad-y) var(--pad-x);
+        display: grid;
+        gap: var(--gap);
+        --u: 1vmin;
+      }
+      .kicker,
+      .lab {
+        font-weight: 700;
+        letter-spacing: var(--pp-kicker-track);
+        text-transform: uppercase;
+        color: var(--pp-crimson);
+        font-size: var(--f-label);
+        line-height: 1.25;
+      }
+      .tags {
+        font-size: var(--f-label);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--pp-ink-2);
+      }
+      .head {
+        grid-area: head;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 2vmin;
+        border-bottom: 1px solid var(--pp-line);
+        padding-bottom: 1.4vmin;
+      }
+      .title {
+        grid-area: title;
+      }
+      .title h1 {
+        font-family: "Source Serif 4", var(--pp-serif);
+        font-weight: 500;
+        font-size: var(--f-title);
+        line-height: 1;
+        letter-spacing: -0.025em;
+      }
+      .title p {
+        margin-top: 1vmin;
+        font-size: var(--f-dek);
+        color: var(--pp-ink-2);
+      }
+      .title p b {
+        color: var(--pp-crimson);
+      }
+      .block {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8vmin;
+        min-width: 0;
+      }
+      .big {
+        font-weight: 800;
+        font-size: var(--f-big);
+        line-height: 0.9;
+        letter-spacing: -0.05em;
+        font-variant-numeric: tabular-nums;
+        color: var(--pp-ink);
+      }
+      .big.hl {
+        color: var(--pp-crimson);
+      }
+      .line {
+        font-size: var(--f-body);
+        color: var(--pp-ink);
+        line-height: 1.3;
+      }
+      .note {
+        font-size: var(--f-note);
+        color: var(--pp-muted);
+        line-height: 1.4;
+      }
+      .statement {
+        font-family: "Source Serif 4", var(--pp-serif);
+        font-weight: 500;
+        font-size: var(--f-statement);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+      }
+      .fleet {
+        grid-area: fleet;
+      }
+      .china {
+        grid-area: china;
+      }
+      .top5 {
+        grid-area: top5;
+      }
+      .sales {
+        grid-area: sales;
+      }
+      .oil {
+        grid-area: oil;
+      }
+      .evidence {
+        grid-area: evidence;
+      }
+      .foot {
+        grid-area: foot;
+        border-top: 1px solid var(--pp-line);
+        padding-top: 1.2vmin;
+        display: grid;
+        gap: 0.5vmin;
+      }
+      .foot .note {
+        font-size: var(--f-note);
+      }
+      .foot .src {
+        color: var(--pp-crimson);
+        font-size: var(--f-note);
+      }
+      .rule-top {
+        border-top: 1.5px solid var(--pp-rule);
+        padding-top: 1.6vmin;
+      }
+      .vr {
+        border-left: 1px solid var(--pp-line);
+        padding-left: 2.4vmin;
+      }
+      /* Poppy chart */
+      .top5 svg {
+        width: 100%;
+        flex: 1;
+        min-height: 0;
+        overflow: visible;
+      }
+      .pc-grid {
+        stroke: var(--pp-muted);
+        stroke-opacity: 0.55;
+        stroke-dasharray: 1 6;
+        stroke-width: 1.4;
+      }
+      .pc-axis {
+        fill: var(--pp-muted);
+        font-size: 26px;
+      }
+      .pc-base {
+        stroke: var(--pp-rule);
+        stroke-width: 2;
+      }
+      .pc-back { fill: var(--pp-crimson-dark); }
+      .pc-front { fill: var(--pp-poppy); }
+      .pc-slit { fill: var(--pp-paper); }
+      .pc-eye { fill: var(--pp-ink); }
+      .pc-leaf { fill: var(--pp-rose-light); }
+      .pc-stem {
+        fill: var(--pp-rose);
+        stroke: none;
+      }
+      .pc-val {
+        font-weight: 800;
+        font-size: 34px;
+        text-anchor: middle;
+        fill: var(--pp-ink);
+      }
+      .pc-val.hl {
+        fill: var(--pp-crimson);
+      }
+      .pc-name {
+        font-weight: 700;
+        font-size: 25px;
+        text-anchor: middle;
+        fill: var(--pp-ink);
+      }
+      /* Sales bars */
+      .bars {
+        display: grid;
+        gap: 0.7vmin;
+        margin-top: 0.6vmin;
+      }
+      .bar {
+        display: grid;
+        grid-template-columns: 34% 1fr auto;
+        gap: 1.4vmin;
+        align-items: center;
+        font-size: var(--f-note);
+        color: var(--pp-ink);
+      }
+      .bar i {
+        height: 0.6vmin;
+        min-height: 5px;
+        border-radius: 99px;
+        background: var(--pp-sand);
+        position: relative;
+        overflow: hidden;
+      }
+      .bar i::after {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: var(--w);
+        background: var(--pp-rose);
+        border-radius: inherit;
+      }
+      .bar b {
+        font-weight: 700;
+        color: var(--pp-ink-2);
+        font-variant-numeric: tabular-nums;
+      }
+      .bar.hl,
+      .bar.hl b {
+        color: var(--pp-crimson);
+      }
+      .bar.hl i::after {
+        background: var(--pp-crimson);
+      }
+      /* Oil dot plot */
+      .dot-plot {
+        position: relative;
+        margin: 1vmin 1.2vmin 0;
+        height: calc(var(--f-body) * 3.4);
+      }
+      .dot-plot .ln {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        height: 2px;
+        background: var(--pp-rose);
+      }
+      .dot-plot span {
+        position: absolute;
+        top: 50%;
+        left: var(--x);
+        transform: translate(-50%, -50%);
+        width: 1.5vmin;
+        height: 1.5vmin;
+        min-width: 12px;
+        min-height: 12px;
+        border-radius: 50%;
+        background: var(--pp-crimson);
+      }
+      .dot-plot b,
+      .dot-plot em {
+        position: absolute;
+        left: var(--x);
+        transform: translateX(-50%);
+        white-space: nowrap;
+      }
+      .dot-plot b {
+        bottom: calc(50% + 1.4vmin);
+        font-size: var(--f-body);
+        font-weight: 700;
+      }
+      .dot-plot em {
+        top: calc(50% + 1.4vmin);
+        font-style: normal;
+        font-size: calc(var(--f-note) * 0.85);
+        letter-spacing: 0.14em;
+        color: var(--pp-muted);
+        text-transform: uppercase;
+      }
+      .dot-plot [data-pos="min"] {
+        --t: 0%;
+      }
+      .dot-plot b[data-pos="min"],
+      .dot-plot em[data-pos="min"] {
+        transform: none;
+      }
+      .dot-plot b[data-pos="max"],
+      .dot-plot em[data-pos="max"] {
+        transform: translateX(-100%);
+      }
+
+      /* ---------- Desktop 16:9 (and wide windows): poster grid, everything on one screen ---------- */
+      @media (min-aspect-ratio: 13/10) {
+        :root {
+          --pad-x: 4.6vw;
+          --pad-y: 3.8vh;
+          --gap: 1.8vh 2.6vw;
+          --chart-h: 100%;
+          --f-label: 1.6vh;
+          --f-title: 6vh;
+          --f-dek: 2.1vh;
+          --f-big: 7vh;
+          --f-body: 1.85vh;
+          --f-note: 1.6vh;
+          --f-statement: 2.5vh;
+        }
+        .sheet {
+          grid-template-columns: 0.8fr 1.55fr 1.05fr;
+          grid-template-rows: auto auto auto auto 1fr auto;
+          grid-template-areas: "head head head" "title title title" "fleet top5 sales" "china top5 oil" "china top5 evidence" "foot foot foot";
+        }
+        .sales,
+        .oil,
+        .evidence {
+          border-left: 1px solid var(--pp-line);
+          padding-left: 2vw;
+        }
+        .oil,
+        .evidence {
+          border-top: 1px solid var(--pp-line);
+          padding-top: 1.2vh;
+        }
+        .china-in-fleet {
+          border-top: 1px solid var(--pp-line);
+          padding-top: 1.2vh;
+        }
+        .bars {
+          gap: 0.3vh;
+        }
+      }
+      /* ---------- 4:5 feed and 1:1: three columns ---------- */
+      @media (max-aspect-ratio: 13/10) and (min-aspect-ratio: 7/10) {
+        :root {
+          --pad-x: 7vw;
+          --pad-y: 5.5vh;
+          --gap: 1.5vmin 3vmin;
+          --chart-h: 23vmin;
+          --f-label: 1.65vmin;
+          --f-title: 4.6vmin;
+          --f-dek: 2.1vmin;
+          --f-big: 4.9vmin;
+          --f-body: 1.95vmin;
+          --f-note: 1.75vmin;
+          --f-statement: 2.6vmin;
+        }
+        .sheet {
+          grid-template-columns: 1fr 1fr 1fr;
+          align-content: start;
+          grid-template-areas: "head head head" "title title title" "fleet china oil" "top5 top5 sales" "evidence evidence evidence" "foot foot foot";
+        }
+
+        .china,
+        .oil,
+        .sales {
+          border-left: 1px solid var(--pp-line);
+          padding-left: 2.4vmin;
+        }
+        .top5,
+        .sales {
+          border-top: 1.5px solid var(--pp-rule);
+          padding-top: 1.2vmin;
+        }
+        .evidence {
+          border-top: 1px solid var(--pp-line);
+          padding-top: 1.2vmin;
+        }
+        .bars {
+          gap: 0.3vmin;
+        }
+        .bar {
+          grid-template-columns: max-content 1fr auto;
+          gap: 1vmin;
+        }
+      }
+      @media (max-aspect-ratio: 9/10) and (min-aspect-ratio: 7/10) {
+        :root {
+          --pad-y: 8vh;
+          --gap: 2vmin 3vmin;
+          --chart-h: 31vmin;
+          --f-big: 6vmin;
+          --f-body: 2.1vmin;
+          --f-note: 1.9vmin;
+          --f-statement: 2.8vmin;
+        }
+      }
+      /* ---------- Phone 9:16 (and narrow windows) ---------- */
+      @media (max-aspect-ratio: 7/10) {
+        :root {
+          --pad-x: 8vw;
+          --pad-y: 4.2vh;
+          --gap: 1.1vh 5vw;
+          --chart-h: 15.5vh;
+          --f-label: 2.2vw;
+          --f-title: 6vw;
+          --f-dek: 2.8vw;
+          --f-big: 8vw;
+          --f-body: 2.7vw;
+          --f-note: 2.4vw;
+          --f-statement: 3.6vw;
+        }
+        .sheet {
+          grid-template-columns: 1fr 1fr;
+          align-content: start;
+          grid-template-areas: "head head" "title title" "fleet china" "top5 top5" "sales sales" "oil evidence" "foot foot";
+        }
+        .head {
+          flex-direction: column;
+          gap: 0.6vh;
+        }
+        .sales,
+        .oil,
+        .evidence {
+          border-top: 1.5px solid var(--pp-rule);
+          padding-top: 1vh;
+        }
+        .evidence {
+          border-left: 1px solid var(--pp-line);
+          padding-left: 3vw;
+        }
+        .bars {
+          gap: 0.2vh;
+        }
+      }
+
+      .top5 svg {
+        flex: none;
+        height: var(--chart-h);
+      }
+      @media (min-aspect-ratio: 13/10) {
+        .top5 svg {
+          flex: 1;
+          height: auto;
+        }
+      }
+      .bar span {
+        white-space: nowrap;
+      }
+      .bar {
+        grid-template-columns: max-content 1fr auto;
+      }
+      /* Scrollable responsive web view for real phones/desktops (not the fixed-canvas renders) */
+      body.web {
+        overflow: auto;
+      }
+      body.web .sheet {
+        position: relative;
+        min-height: 100vh;
+      }
+
+      .bars {
+        grid-template-columns: max-content 1fr auto;
+        column-gap: 1.4vmin;
+        align-items: center;
+      }
+      .bar {
+        display: contents;
+      }
+      .bar > i {
+        width: 100%;
+      }
+      .pc-name {
+        font-size: var(--pc-name, 25px) !important;
+      }
+      .pc-val {
+        font-size: var(--pc-val, 34px) !important;
+      }
+      .pc-axis {
+        font-size: var(--pc-axis, 26px) !important;
+      }
+      @media (max-aspect-ratio: 13/10) {
+        :root {
+          --pc-name: 40px;
+          --pc-val: 50px;
+          --pc-axis: 36px;
+        }
+      }
+      @media (max-aspect-ratio: 13/10) and (min-aspect-ratio: 9/10) {
+        :root {
+          --pad-y: 3.8vh;
+          --gap: 1vmin 2.8vmin;
+          --chart-h: 23vmin;
+          --f-label: 1.6vmin;
+          --f-title: 4.4vmin;
+          --f-dek: 2vmin;
+          --f-big: 4.6vmin;
+          --f-body: 1.85vmin;
+          --f-note: 1.65vmin;
+          --f-statement: 2.4vmin;
+        }
+      }
+      @media (max-aspect-ratio: 7/10) {
+        :root {
+          --pad-y: 3.6vh;
+          --gap: 1vh 5vw;
+          --chart-h: 17vh;
+          --f-title: 5.6vw;
+          --f-dek: 2.6vw;
+          --f-big: 7vw;
+          --f-body: 2.5vw;
+          --f-note: 2.2vw;
+          --f-statement: 3.3vw;
+        }
+      }
+
+      /* 4:5 feed: chart gets its own full-width row; sales spans two columns so its bars read as bars */
+      @media (max-aspect-ratio: 9/10) and (min-aspect-ratio: 7/10) {
+        :root {
+          --pad-y: 4.4vh;
+          --chart-h: 25vmin;
+          --gap: 1.5vmin 3vmin;
+          --f-big: 5.2vmin;
+          --f-body: 1.95vmin;
+          --f-note: 1.75vmin;
+          --f-statement: 2.4vmin;
+          --f-title: 4.4vmin;
+        }
+        .sheet {
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-template-areas: "head head head" "title title title" "fleet china oil" "top5 top5 top5" "sales sales evidence" "foot foot foot";
+        }
+        .sales {
+          border-left: 0;
+          padding-left: 0;
+        }
+        .evidence {
+          border-top: 1.5px solid var(--pp-rule);
+          border-left: 1px solid var(--pp-line);
+          padding-left: 2.4vmin;
+        }
+      }
+      /* 1:1: wider third column for the sales bars */
+      @media (max-aspect-ratio: 13/10) and (min-aspect-ratio: 9/10) {
+        .sheet {
+          grid-template-columns: 0.9fr 0.9fr 1.3fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="sheet" id="sheet">
+      <header class="head">
+        <p class="kicker" id="kicker"></p>
+        <p class="tags" id="tags"></p>
+      </header>
+      <section class="title">
+        <h1 id="title"></h1>
+        <p id="dek"></p>
+      </section>
+      <section class="block fleet">
+        <div class="block">
+          <p class="lab" data-l="fleet"></p>
+          <p class="big" data-v="fleet"></p>
+          <p class="line" data-t="fleet"></p>
+          <p class="note" data-n="fleet"></p>
+        </div>
+        <div class="block china-in-fleet">
+          <p class="lab" data-l="china"></p>
+          <p class="big hl" data-v="china"></p>
+          <p class="line" data-t="china"></p>
+          <p class="note" data-n="china"></p>
+        </div>
+      </section>
+      <section class="block china"></section>
+      <section class="block top5">
+        <p class="lab" data-l="top5"></p>
+        <p class="note" data-n="top5"></p>
+        <svg
+          id="poppy"
+          viewBox="0 -70 1070 680"
+          preserveAspectRatio="xMidYMid meet"
+          role="img"
+        ></svg>
+      </section>
+      <section class="block sales">
+        <p class="lab" data-l="sales"></p>
+        <p class="line" data-t="sales"></p>
+        <div class="bars" id="bars"></div>
+        <p class="note" data-n="sales"></p>
+      </section>
+      <section class="block oil">
+        <p class="lab" data-l="oil"></p>
+        <p class="big hl" data-v="oil"></p>
+        <p class="line" data-t="oil"></p>
+        <div class="dot-plot" id="dots"><div class="ln"></div></div>
+        <p class="note" data-n="oil"></p>
+      </section>
+      <section class="block evidence">
+        <p class="lab" data-l="evidence"></p>
+        <p class="statement" data-t="evidence"></p>
+        <p class="note" data-n="evidence"></p>
+      </section>
+      <footer class="foot">
+        <p class="note" id="notes"></p>
+        <p class="src" id="src"></p>
+      </footer>
+    </main>
+    <script>
+      (function () {
+        const C = window.EV_CONTENT,
+          $ = (s) => document.querySelector(s),
+          $$ = (s) => [...document.querySelectorAll(s)];
+        if (new URLSearchParams(location.search).has("web")) document.body.classList.add("web");
+        const ins = (id) => C.insights.find((x) => x.id === id),
+          chart = (id) => C.charts.find((c) => c.id === id);
+        $("#kicker").textContent = C.kicker;
+        $("#tags").textContent = C.tags;
+        $("#title").textContent = C.title;
+        // dek with the top-5 share highlighted (the number comes from the dek text itself)
+        $("#dek").innerHTML = C.dek.replace(/(\d+(\.\d+)?%)/, "<b>$1</b>");
+        $$("[data-l]").forEach((n) => (n.textContent = ins(n.dataset.l).label));
+        $$("[data-v]").forEach((n) => (n.textContent = ins(n.dataset.v).value));
+        $$("[data-t]").forEach((n) => (n.textContent = ins(n.dataset.t).line));
+        $$("[data-n]").forEach((n) => (n.textContent = ins(n.dataset.n).note));
+        $("#notes").textContent = C.notes.join(" ");
+        $("#src").textContent = C.source_line;
+        // On stacked layouts China gets its own cell; on desktop it stays under the fleet number (like the poster)
+        $(".china").appendChild($(".china-in-fleet"));
+        // Sales bars
+        const s = chart("sales");
+        $("#bars").innerHTML = s.rows
+          .map(
+            (r) =>
+              `<div class="bar${r[0] === s.highlight ? " hl" : ""}"><span>${r[0]}</span><i style="--w:${r[1]}%"></i><b>${r[2]}</b></div>`
+          )
+          .join("");
+        // Oil dot plot
+        const o = chart("oil").rows,
+          lo = o[0][1],
+          hi = o[2][1],
+          keys = ["min", "median", "max"];
+        o.forEach((r, k) => {
+          const x = ((r[1] - lo) / (hi - lo)) * 100 + "%";
+          $("#dots").insertAdjacentHTML(
+            "beforeend",
+            `<span style="--x:${x}"></span><b data-pos="${keys[k]}" style="--x:${x}">${r[2]}</b><em data-pos="${keys[k]}" style="--x:${x}">${r[0]}</em>`
+          );
+        });
+        // Poppy chart (same drawing as the site and the video)
+        const NS = "http://www.w3.org/2000/svg",
+          svg = $("#poppy");
+        const mk = (t, a, p) => {
+          const n = document.createElementNS(NS, t);
+          for (const k in a) n.setAttribute(k, a[k]);
+          p.appendChild(n);
+          return n;
+        };
+        svg.innerHTML = `<defs><radialGradient id="pt" cx="35%" cy="30%" r="75%"><stop offset="0%" stop-color="#f6907c"/><stop offset="55%" style="stop-color:var(--pp-poppy)"/><stop offset="100%" style="stop-color:var(--pp-crimson)"/></radialGradient><radialGradient id="pb" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#c8343a"/><stop offset="100%" stop-color="#8f1c24"/></radialGradient></defs>`;
+        const rows = chart("top5").rows,
+          BASE = 520,
+          MAXV = 55e6,
+          y = (v) => BASE - (v / MAXV) * 470,
+          maxF = rows[rows.length - 1][1];
+        svg.setAttribute("aria-label", rows.map((r) => r[0] + " " + r[2]).join(", "));
+        for (let v = 10e6; v <= 50e6; v += 10e6) {
+          mk("line", { class: "pc-grid", x1: 20, x2: 960, y1: y(v), y2: y(v) }, svg);
+          mk(
+            "text",
+            { class: "pc-axis", x: 1065, y: y(v) + 9, "text-anchor": "end" },
+            svg
+          ).textContent = v / 1e6 + (v === 50e6 ? "M" : "");
+        }
+        mk("line", { class: "pc-base", x1: 20, x2: 980, y1: BASE, y2: BASE }, svg);
+        const xs = [80, 270, 460, 650, 870];
+        rows.forEach((r, i) => {
+          const x = xs[i],
+            cy = y(r[1]),
+            R = 10 + 66 * Math.sqrt(r[1] / maxF);
+          // Soft stem + tiny leaves + flat poppy head: the same drawing as the video (field.html)
+          const y1 = cy + R * 0.5, h = BASE - y1, L0 = 10 + 0.14 * h, x0 = x - L0;
+          const P = [[x0, BASE], [x0 + L0 * 0.02, BASE - h * 0.55], [x - L0 * 0.25, y1 + h * 0.25], [x, y1]];
+          const at = (t) => { const u = 1 - t; return [0, 1].map((k) => u * u * u * P[0][k] + 3 * u * u * t * P[1][k] + 3 * u * t * t * P[2][k] + t * t * t * P[3][k]); };
+          const tan = (t) => { const p0 = at(Math.max(0, t - 0.01)), p1 = at(Math.min(1, t + 0.01)); return Math.atan2(p1[1] - p0[1], p1[0] - p0[0]); };
+          const Lt = [], Rt = [];
+          for (let n = 0; n <= 32; n++) {
+            const t = n / 32, ang = tan(t), nx = -Math.sin(ang), ny = Math.cos(ang), c = at(t);
+            const wv = Math.sin(t * Math.PI * 2.4 + i * 1.7) * 0.35 * Math.sin(t * Math.PI), w = (2.6 + (0.8 - 2.6) * Math.pow(t, 0.7)) / 2;
+            Lt.push([c[0] + nx * (w + wv), c[1] + ny * (w + wv)]); Rt.push([c[0] - nx * (w - wv), c[1] - ny * (w - wv)]);
+          }
+          mk("path", { class: "pc-stem", d: "M" + Lt.concat(Rt.reverse()).map((p) => p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" L") + " Z" }, svg);
+          if (h >= 60) {
+            const spots = h > 200 ? [[0.3, -1], [0.56, 1]] : [[0.42, i % 2 ? 1 : -1]], len = Math.min(26, 13 + 0.045 * h);
+            spots.forEach(([t, side]) => {
+              const c = at(t), deg = (tan(t) * 180) / Math.PI + side * 38;
+              const lf = mk("g", { transform: "translate(" + c[0].toFixed(1) + " " + c[1].toFixed(1) + ") rotate(" + deg.toFixed(1) + ")" }, svg);
+              mk("path", { class: "pc-leaf", d: "M0,0 Q" + len * 0.45 + "," + -len * 0.3 + " " + len + ",0 Q" + len * 0.45 + "," + len * 0.3 + " 0,0 Z" }, lf);
+            });
+          }
+          const g = mk("g", { transform: `translate(${x} ${cy})` }, svg), rot = i * 17;
+          [0, 90, 180, 270].forEach((a) => mk("circle", { cx: 0, cy: -R * 0.42, r: R * 0.5, class: "pc-back", transform: `rotate(${a + 45 + rot})` }, g));
+          [0, 90, 180, 270].forEach((a) => mk("circle", { cx: 0, cy: -R * 0.4, r: R * 0.52, class: "pc-front", transform: `rotate(${a + rot})` }, g));
+          [45, 135, 225, 315].forEach((a) => mk("path", { class: "pc-slit", d: "M0," + -R * 0.12 + " Q" + R * 0.1 + "," + -R * 0.36 + " 0," + -R * 0.64 + " Q" + -R * 0.1 + "," + -R * 0.36 + " 0," + -R * 0.12 + " Z", transform: `rotate(${a + rot})` }, g));
+          mk("circle", { r: R * 0.17, class: "pc-slit" }, g);
+          mk("circle", { r: R * 0.11, class: "pc-eye" }, g);
+          mk(
+            "text",
+            { class: "pc-val" + (i === rows.length - 1 ? " hl" : ""), x, y: cy - R - 16 },
+            svg
+          ).textContent = r[2];
+          {
+            const t = mk("text", { class: "pc-name", x, y: BASE + 44 }, svg);
+            r[0].split(" ").forEach((w, k) => {
+              const sp = mk("tspan", { x, dy: k ? "1.05em" : 0 }, t);
+              sp.textContent = w;
+            });
+          }
+        });
+      })();
+    </script>
+    <script>
+      // ?qa: report anything outside the canvas into <body data-qa> (read by tools/render.mjs)
+      if (new URLSearchParams(location.search).has("qa"))
+        addEventListener("load", () =>
+          setTimeout(() => {
+            const W = innerWidth,
+              H = innerHeight,
+              bad = [];
+            document.querySelectorAll(".sheet > *").forEach((e) => {
+              const r = e.getBoundingClientRect();
+              if (r.bottom > H + 1 || r.right > W + 1)
+                bad.push(
+                  e.className.split(" ").slice(-1)[0] + "@" + Math.round(r.bottom) + "/" + H
+                );
+            });
+            document.body.setAttribute("data-qa", bad.length ? "OVERFLOW " + bad.join(" ") : "OK");
+          }, 300)
+        );
+    </script>
+  </body>
+</html>

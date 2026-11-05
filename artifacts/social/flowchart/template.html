@@ -1,0 +1,235 @@
+<!doctype html>
+<!--
+  EV project override of the /post-social "From public data to published story" image, in the
+  poppy design language of the web app (design/poppy-design-language.md, site/shared/poppy.css).
+  Same data and structure as run-framework/references/social-templates/framework-flowchart/
+  (which stays untouched); render-flowchart.mjs injects post.json "about" as window.ABOUT and
+  screenshots this page at 1080x1350.
+-->
+<html lang="en" class="theme-data poppy">
+  <head>
+    <meta charset="utf-8" />
+    <title>Framework flowchart</title>
+    <link rel="stylesheet" href="../../../site/shared/poppy.css" />
+    <style>
+      @font-face {
+        font-family: "Source Serif 4";
+        src: url("source-serif-4-latin.woff2") format("woff2");
+        font-weight: 400 600;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1350px;
+        background: var(--pp-paper);
+        color: var(--pp-ink);
+        font-family: var(--pp-sans);
+      }
+      .page {
+        box-sizing: border-box;
+        height: 100%;
+        padding: 96px 130px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 40px;
+      }
+      h1 {
+        margin: 0;
+        font-family: var(--pp-serif);
+        font-weight: 500;
+        font-size: 66px;
+        line-height: 1.02;
+        letter-spacing: -0.025em;
+      }
+      .sub {
+        margin: 16px 0 0;
+        font-size: 26px;
+        line-height: 1.3;
+        color: var(--pp-ink-2);
+      }
+      /* Flow: flat rows, ink rule on top; gates hang on a rose stem */
+      .flow {
+        border-bottom: 1px solid var(--pp-line);
+      }
+      .step {
+        display: flex;
+        align-items: baseline;
+        gap: 18px;
+        border-top: 1px solid var(--pp-line);
+        padding: 13px 0;
+        font-size: 27px;
+        font-weight: 700;
+      }
+      .flow .step:first-child {
+        border-top: 2px solid var(--pp-rule);
+      }
+      .step .n {
+        flex: none;
+        width: 30px;
+        font-size: 27px;
+        font-weight: 800;
+        color: var(--pp-crimson);
+        font-variant-numeric: tabular-nums;
+      }
+      .step small {
+        margin-left: auto;
+        font-size: 21px;
+        font-weight: 400;
+        color: var(--pp-muted);
+        text-align: right;
+      }
+      .step.out .n {
+        align-self: center;
+        height: 30px;
+        font-size: 0;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle, var(--pp-ink) 0 20%, transparent 22%),
+          radial-gradient(circle at 35% 30%, #f07a68, var(--pp-poppy) 55%, var(--pp-crimson) 100%);
+      }
+      .gate {
+        display: flex;
+        align-items: center;
+        height: 34px;
+        padding-left: 14px;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--pp-crimson);
+      }
+      .gate::before {
+        content: "";
+        width: 2px;
+        height: 100%;
+        background: var(--pp-rose-light);
+        margin-right: 30px;
+      }
+      /* Times: thin bars on a sand track, the framework (subject) crimson, the rest rose */
+      .times h2 {
+        margin: 0 0 6px;
+        padding-top: 16px;
+        border-top: 2px solid var(--pp-rule);
+        font-family: var(--pp-serif);
+        font-weight: 500;
+        font-size: 36px;
+        letter-spacing: -0.02em;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: baseline;
+        row-gap: 10px;
+        padding: 12px 0;
+        font-size: 24px;
+      }
+      .row .who {
+        color: var(--pp-ink-2);
+      }
+      .row .val {
+        font-weight: 800;
+        font-size: 26px;
+        color: var(--pp-ink);
+        font-variant-numeric: tabular-nums;
+      }
+      .row .track {
+        grid-column: 1 / -1;
+        height: 8px;
+        border-radius: 4px;
+        background: var(--pp-sand);
+      }
+      .row .fill {
+        height: 100%;
+        min-width: 8px;
+        border-radius: 4px;
+        background: var(--pp-rose);
+      }
+      .row.subject .who,
+      .row.subject .val {
+        color: var(--pp-crimson);
+        font-weight: 800;
+      }
+      .row.subject .fill {
+        background: var(--pp-crimson);
+      }
+      .note {
+        margin: 0;
+        font-size: 20px;
+        line-height: 1.4;
+        color: var(--pp-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div>
+        <h1 id="title"></h1>
+        <p class="sub" id="subtitle"></p>
+      </div>
+      <div class="flow" id="flow"></div>
+      <div class="times">
+        <h2>Time to build this level of work</h2>
+        <div id="rows"></div>
+      </div>
+      <p class="note" id="note"></p>
+    </div>
+    <script>
+      (function () {
+        var A = window.ABOUT;
+        var esc = function (s) {
+          return String(s).replace(/[&<>"]/g, function (c) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+          });
+        };
+        // Sentence case per the design language: "From public data / to published story"
+        document.getElementById("title").innerHTML = esc(A.flowchart_title).replace(
+          /\n/g,
+          "<br />"
+        );
+        document.getElementById("subtitle").textContent = A.flowchart_subtitle;
+        var flow = "";
+        A.steps.forEach(function (s, i) {
+          var last = i === A.steps.length - 1;
+          flow +=
+            '<div class="step' +
+            (last ? " out" : "") +
+            '"><span class="n">' +
+            (i + 1) +
+            "</span>" +
+            esc(s.name) +
+            "<small>" +
+            esc(s.note) +
+            "</small></div>";
+          if (s.gate_after) flow += '<div class="gate">' + esc(s.gate_after) + "</div>";
+        });
+        document.getElementById("flow").innerHTML = flow;
+        var max = Math.max.apply(
+          null,
+          A.times.map(function (t) {
+            return t.hours;
+          })
+        );
+        document.getElementById("rows").innerHTML = A.times
+          .map(function (t, i) {
+            var subject = i === A.times.length - 1;
+            return (
+              '<div class="row' +
+              (subject ? " subject" : "") +
+              '"><span class="who">' +
+              esc(t.label) +
+              '</span><span class="val">' +
+              esc(t.value) +
+              '</span><div class="track"><div class="fill" style="width:' +
+              ((t.hours / max) * 100).toFixed(1) +
+              '%"></div></div></div>'
+            );
+          })
+          .join("");
+        document.getElementById("note").textContent =
+          A.times_note + (A.image_note ? " " + A.image_note : "");
+      })();
+    </script>
+  </body>
+</html>

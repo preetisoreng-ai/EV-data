@@ -1,0 +1,9 @@
+The shape of the global EV fleet. Five markets account for 77.7% of the supplied world fleet.
+
+I turned the latest EV fleet and monthly sales data into a data story, told with poppies. The 41-second version:
+• 90.6M vehicles in the supplied World total
+• China: 57.2% of the supplied World fleet. The five largest markets: 77.7%
+• 58.3% — China’s rolling 12-month EV sales share
+• 4.2× spread in reported oil displaced per EV, and the source does not document the method
+
+Watch it on any device: https://preetisoreng-ai.github.io/EV-data/site/intro/

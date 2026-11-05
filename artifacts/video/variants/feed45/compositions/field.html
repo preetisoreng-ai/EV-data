@@ -1,0 +1,865 @@
+<template>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      container-type: size;
+      --lab: 36px;
+    }
+    #root .field {
+      position: absolute;
+      left: 46cqw;
+      top: 8cqh;
+      width: 50cqw;
+      height: 84cqh;
+    }
+    #root svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+    @container (aspect-ratio < 0.7) {
+      #root {
+        --lab: 36px;
+      }
+      #root .field {
+        left: 10cqw;
+        width: 80cqw;
+        top: 48cqh;
+        height: 38cqh;
+      }
+    }
+    @container (0.7 <= aspect-ratio < 0.9) {
+      #root {
+        --lab: 46px;
+      }
+      #root .field {
+        left: 15cqw;
+        width: 70cqw;
+        top: 49cqh;
+        height: 36cqh;
+      }
+    }
+    @container (0.9 <= aspect-ratio < 1.3) {
+      #root {
+        --lab: 54px;
+      }
+      #root .field {
+        left: 15cqw;
+        width: 70cqw;
+        top: 45cqh;
+        height: 40cqh;
+      }
+    }
+    #root .ground {
+      stroke: var(--pp-rule);
+      stroke-width: 2;
+    }
+    #root .petal-back {
+      fill: var(--pp-crimson-dark);
+    }
+    #root .petal-front {
+      fill: var(--pp-poppy);
+    }
+    #root .petal-front.alt {
+      fill: var(--pp-crimson);
+    }
+    #root .slit,
+    #root .ring {
+      fill: var(--pp-paper);
+    }
+    #root .eye {
+      fill: var(--pp-ink);
+    }
+    #root .stem {
+      fill: var(--pp-rose);
+      stroke: none;
+    }
+    #root .leaf {
+      fill: var(--pp-rose-light);
+    }
+    #root .leaf-rib {
+      fill: none;
+      stroke: var(--pp-paper);
+      stroke-width: 0.7;
+      stroke-linecap: round;
+      opacity: 0.7;
+    }
+    #root .grid {
+      stroke: var(--pp-muted);
+      stroke-opacity: 0.55;
+      stroke-dasharray: 1 7;
+      stroke-width: 1.5;
+    }
+    #root text {
+      font-family: Inter, sans-serif;
+      font-size: var(--lab);
+      fill: var(--pp-ink-2);
+    }
+    #root .axis {
+      fill: var(--pp-muted);
+      font-size: calc(var(--lab) * 0.82);
+    }
+    #root .val {
+      font-weight: 900;
+      fill: var(--pp-ink);
+      text-anchor: middle;
+      letter-spacing: -0.02em;
+    }
+    #root .val.hl {
+      fill: var(--pp-crimson);
+    }
+    #root .track,
+    #root .seed {
+      fill: var(--pp-sand);
+    }
+    #root .fill {
+      fill: var(--pp-rose);
+    }
+    #root .fill.hl {
+      fill: var(--pp-crimson);
+    }
+    #root .rowlab {
+      fill: var(--pp-ink);
+    }
+    #root .rowlab.hl,
+    #root .rowval.hl {
+      fill: var(--pp-crimson);
+      font-weight: 700;
+    }
+    #root .rowval {
+      font-weight: 700;
+      text-anchor: end;
+      fill: var(--pp-ink-2);
+    }
+    #root .oil-line {
+      stroke: var(--pp-rose);
+      stroke-width: 3;
+    }
+    #root .dot {
+      fill: var(--pp-crimson);
+    }
+    #root .dpv {
+      font-weight: 700;
+      text-anchor: middle;
+      fill: var(--pp-ink);
+    }
+    #root .dpl {
+      text-anchor: middle;
+      fill: var(--pp-muted);
+      font-size: calc(var(--lab) * 0.82);
+      letter-spacing: 0.14em;
+    }
+  </style>
+  <div
+    data-hf-id="hf-qkep"
+    id="root"
+    data-composition-id="field"
+    data-width="1080"
+    data-height="1350"
+  >
+    <div data-hf-id="hf-1e51" class="field" data-layout-allow-overflow>
+      <svg
+        data-hf-id="hf-7ol1"
+        id="fd-svg"
+        viewBox="0 -70 1000 790"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <defs data-hf-id="hf-mh0t">
+          <radialGradient data-hf-id="hf-cyli" id="fd-petal" cx="35%" cy="30%" r="75%">
+            <stop data-hf-id="hf-pmoq" offset="0%" stop-color="#f6907c" />
+            <stop data-hf-id="hf-9ute" offset="55%" style="stop-color: var(--pp-poppy)" />
+            <stop data-hf-id="hf-e57m" offset="100%" style="stop-color: var(--pp-crimson)" />
+          </radialGradient>
+          <radialGradient data-hf-id="hf-hqse" id="fd-petal-back" cx="50%" cy="50%" r="70%">
+            <stop data-hf-id="hf-2xzb" offset="0%" stop-color="#c8343a" />
+            <stop data-hf-id="hf-m5wy" offset="100%" stop-color="#8f1c24" />
+          </radialGradient>
+        </defs>
+        <g data-hf-id="hf-v3bm" id="fd-grid"></g>
+        <line
+          data-hf-id="hf-gb5p"
+          id="fd-ground"
+          class="ground"
+          x1="20"
+          x2="980"
+          y1="500"
+          y2="500"
+        />
+        <g data-hf-id="hf-myg4" id="fd-seeds"></g>
+        <g data-hf-id="hf-4ry8" id="fd-plants"></g>
+        <g data-hf-id="hf-athw" id="fd-bars"></g>
+        <g data-hf-id="hf-kosa" id="fd-oil"></g>
+        <g data-hf-id="hf-d7vv" id="fd-solo"></g>
+      </svg>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const C = window.EV_CONTENT;
+      const NS = "http://www.w3.org/2000/svg";
+      const mk = (tag, attrs, parent) => {
+        const n = document.createElementNS(NS, tag);
+        for (const k in attrs) n.setAttribute(k, attrs[k]);
+        if (parent) parent.appendChild(n);
+        return n;
+      };
+      const chart = (id) => C.charts.find((c) => c.id === id);
+      const BASE = 500,
+        MAXV = 55e6,
+        y = (v) => BASE - (v / MAXV) * 440;
+
+      // One poppy head, drawn flat like the inspiration: four dark back petals on the diagonals,
+      // four round front petals in poppy red, four paper-white slits radiating between them, and a
+      // dark centre with a paper ring. Each petal is its own group so it can fly or fall.
+      function head(parent, R, rot) {
+        const petals = [];
+        [0, 90, 180, 270].forEach((a) => {
+          const g = mk("g", {}, parent);
+          mk(
+            "circle",
+            {
+              cx: 0,
+              cy: -R * 0.42,
+              r: R * 0.5,
+              class: "petal-back",
+              transform: "rotate(" + (a + 45 + rot) + ")",
+            },
+            g
+          );
+          petals.push(g);
+        });
+        [0, 90, 180, 270].forEach((a, k) => {
+          const g = mk("g", {}, parent);
+          mk(
+            "circle",
+            {
+              cx: 0,
+              cy: -R * 0.4,
+              r: R * 0.52,
+              class: "petal-front",
+              transform: "rotate(" + (a + rot) + ")",
+            },
+            g
+          );
+          petals.push(g);
+        });
+        const core = mk("g", {}, parent);
+        [45, 135, 225, 315].forEach((a) =>
+          mk(
+            "path",
+            {
+              class: "slit",
+              d:
+                "M0," +
+                -R * 0.12 +
+                " Q" +
+                R * 0.1 +
+                "," +
+                -R * 0.36 +
+                " 0," +
+                -R * 0.64 +
+                " Q" +
+                -R * 0.1 +
+                "," +
+                -R * 0.36 +
+                " 0," +
+                -R * 0.12 +
+                " Z",
+              transform: "rotate(" + (a + rot) + ")",
+            },
+            core
+          )
+        );
+        mk("circle", { r: R * 0.17, class: "ring" }, core);
+        mk("circle", { r: R * 0.11, class: "eye" }, core);
+        return { petals, core };
+      }
+
+      // A soft stem: a hairline ribbon that rises from a point left of the flower and sweeps right
+      // into the head in one long curve (taller stems sweep further), tapering from ground to head,
+      // with a faint deterministic waver. Tiny almond leaves balance the taller stems.
+      function softStem(parent, x1, y1, seed, opts) {
+        const o = Object.assign({ wBase: 2.6, wTop: 0.8, leaves: true, cls: "stem" }, opts || {});
+        const h = BASE - y1,
+          L = 10 + 0.14 * h,
+          x0 = x1 - L,
+          y0 = BASE;
+        const P = [
+          [x0, y0],
+          [x0 + L * 0.02, y0 - h * 0.55],
+          [x1 - L * 0.25, y1 + h * 0.25],
+          [x1, y1],
+        ];
+        const pt = (t) => {
+          const u = 1 - t;
+          return [0, 1].map(
+            (k) =>
+              u * u * u * P[0][k] +
+              3 * u * u * t * P[1][k] +
+              3 * u * t * t * P[2][k] +
+              t * t * t * P[3][k]
+          );
+        };
+        const tan = (t) => {
+          const p0 = pt(Math.max(0, t - 0.01)),
+            p1 = pt(Math.min(1, t + 0.01));
+          return Math.atan2(p1[1] - p0[1], p1[0] - p0[0]);
+        };
+        const left = [],
+          right = [];
+        for (let n = 0; n <= 32; n++) {
+          const t = n / 32,
+            ang = tan(t),
+            nx = -Math.sin(ang),
+            ny = Math.cos(ang),
+            c = pt(t);
+          const waver = Math.sin(t * Math.PI * 2.4 + seed * 1.7) * 0.35 * Math.sin(t * Math.PI);
+          const w = (o.wBase + (o.wTop - o.wBase) * Math.pow(t, 0.7)) / 2;
+          left.push([c[0] + nx * (w + waver), c[1] + ny * (w + waver)]);
+          right.push([c[0] - nx * (w - waver), c[1] - ny * (w - waver)]);
+        }
+        const g = mk("g", {}, parent);
+        mk(
+          "path",
+          {
+            class: o.cls,
+            d:
+              "M" +
+              left
+                .concat(right.reverse())
+                .map((p) => p[0].toFixed(1) + "," + p[1].toFixed(1))
+                .join(" L") +
+              " Z",
+          },
+          g
+        );
+        if (o.leaves && h >= 60) {
+          const spots =
+            h > 200
+              ? [
+                  [0.3, -1],
+                  [0.56, 1],
+                ]
+              : [[0.42, seed % 2 ? 1 : -1]];
+          const len = Math.min(26, 13 + 0.045 * h);
+          spots.forEach(([t, side]) => {
+            const c = pt(t),
+              deg = (tan(t) * 180) / Math.PI + side * 38;
+            const lf = mk(
+              "g",
+              {
+                transform:
+                  "translate(" +
+                  c[0].toFixed(1) +
+                  " " +
+                  c[1].toFixed(1) +
+                  ") rotate(" +
+                  deg.toFixed(1) +
+                  ")",
+              },
+              g
+            );
+            mk(
+              "path",
+              {
+                class: "leaf",
+                d:
+                  "M0,0 Q" +
+                  len * 0.45 +
+                  "," +
+                  -len * 0.3 +
+                  " " +
+                  len +
+                  ",0 Q" +
+                  len * 0.45 +
+                  "," +
+                  len * 0.3 +
+                  " 0,0 Z",
+              },
+              lf
+            );
+            mk("path", { class: "leaf-rib", d: "M" + len * 0.12 + ",0 L" + len * 0.8 + ",0" }, lf);
+          });
+        }
+        return g;
+      }
+
+      // ---------- Plants: top-5 fleets, smallest → largest (content.json charts.top5) ----------
+      const rows5 = chart("top5").rows; // [area, fleet, label]
+      const maxF = rows5[rows5.length - 1][1];
+      const xs = [80, 230, 380, 540, 800];
+      const plants = rows5.map((r, i) => {
+        const x = xs[i],
+          cy = y(r[1]),
+          R = 9 + 66 * Math.sqrt(r[1] / maxF);
+        const g = mk("g", { id: "fd-plant-" + i }, document.getElementById("fd-plants"));
+        const stem = softStem(g, x, cy + R * 0.5, i);
+        const grow = mk("clipPath", { id: "fd-grow-" + i }, document.querySelector("#fd-svg defs"));
+        const growRect = mk("rect", { x: x - 260, y: BASE, width: 520, height: 0 }, grow);
+        stem.setAttribute("clip-path", "url(#fd-grow-" + i + ")");
+        const hd = mk("g", { transform: "translate(" + x + " " + cy + ")" }, g);
+        const sprout = mk("g", { transform: "scale(0)" }, hd);
+        const bloom = mk("g", { id: "fd-bloom-" + i }, sprout);
+        const hp = head(bloom, R, i * 17);
+        const val = mk(
+          "text",
+          { class: "val" + (i === 4 ? " hl" : ""), x: x, y: cy - R - 16, id: "fd-val-" + i },
+          g
+        );
+        val.textContent = r[2];
+        return {
+          g,
+          x,
+          cy,
+          R,
+          bloom,
+          val,
+          stem,
+          petals: hp.petals,
+          core: hp.core,
+          rot: i * 17,
+          growRect,
+          sprout,
+        };
+      });
+
+      // Gridlines + axis (0–50M), hidden on the cover
+      const grid = document.getElementById("fd-grid");
+      for (let v = 10e6; v <= 50e6; v += 10e6) {
+        mk("line", { class: "grid", x1: 20, x2: 900, y1: y(v), y2: y(v) }, grid);
+        const t = mk("text", { class: "axis", x: 990, y: y(v) + 9, "text-anchor": "end" }, grid);
+        t.textContent = v / 1e6 + (v === 50e6 ? "M" : "");
+      }
+
+      // ---------- Seeds: 100, of which China's share are crimson ----------
+      const chinaPct = Math.round(parseFloat(C.insights.find((x) => x.id === "china").value));
+      const seeds = [];
+      for (let k = 0; k < 100; k++) {
+        const s = mk(
+          "circle",
+          {
+            cx: 120 + (k % 20) * 40,
+            cy: 570 + Math.floor(k / 20) * 32,
+            r: 10,
+            class: "seed",
+          },
+          document.getElementById("fd-seeds")
+        );
+        seeds.push(s);
+      }
+      const seedsOn = seeds.slice(0, chinaPct);
+
+      // ---------- Bars: rolling 12-month sales share ----------
+      const salesRows = chart("sales").rows; // [area, value, label]
+      const bars = document.getElementById("fd-bars");
+      const barParts = { lab: [], track: [], fill: [], val: [] };
+      salesRows.forEach((r, k) => {
+        const yy = 40 + k * 70,
+          hl = r[0] === chart("sales").highlight;
+        const lab = mk("text", { class: "rowlab" + (hl ? " hl" : ""), x: 0, y: yy + 11 }, bars);
+        lab.textContent = r[0];
+        const tr = mk(
+          "rect",
+          { class: "track", x: 400, y: yy - 5, width: 460, height: 12, rx: 6 },
+          bars
+        );
+        const fl = mk(
+          "rect",
+          {
+            class: "fill" + (hl ? " hl" : ""),
+            x: 400,
+            y: yy - 5,
+            width: Math.max(12, (460 * r[1]) / 100),
+            height: 12,
+            rx: 6,
+          },
+          bars
+        );
+        const vl = mk("text", { class: "rowval" + (hl ? " hl" : ""), x: 1000, y: yy + 11 }, bars);
+        vl.textContent = r[2];
+        barParts.lab.push(lab);
+        barParts.track.push(tr);
+        barParts.fill.push(fl);
+        barParts.val.push(vl);
+      });
+
+      // ---------- Oil: min / median / max dot plot ----------
+      const oilRows = chart("oil").rows; // [Min|Median|Max, value, label]
+      const oil = document.getElementById("fd-oil");
+      const lo = oilRows[0][1],
+        hi = oilRows[2][1],
+        ox = (v) => 70 + ((v - lo) / (hi - lo)) * 860;
+      const oilLine = mk("line", { class: "oil-line", x1: 70, x2: 930, y1: 300, y2: 300 }, oil);
+      const oilDots = [],
+        oilVals = [],
+        oilLabs = [];
+      oilRows.forEach((r) => {
+        oilDots.push(mk("circle", { class: "dot", cx: ox(r[1]), cy: 300, r: 14 }, oil));
+        const v = mk("text", { class: "dpv", x: ox(r[1]), y: 255 }, oil);
+        v.textContent = r[2];
+        oilVals.push(v);
+        const l = mk("text", { class: "dpl", x: ox(r[1]), y: 360 }, oil);
+        l.textContent = r[0].toUpperCase();
+        oilLabs.push(l);
+      });
+
+      // ---------- Solo poppy for the evidence beat ----------
+      const solo = document.getElementById("fd-solo");
+      // Natural stem, revealed from the ground up through a growing clip
+      const soloClip = mk(
+        "clipPath",
+        { id: "fd-solo-clip" },
+        document.querySelector("#fd-svg defs")
+      );
+      const soloClipRect = mk("rect", { x: 380, y: 500, width: 240, height: 0 }, soloClip);
+      const soloStem = softStem(solo, 500, 240, 7, { wBase: 3, wTop: 1 });
+      soloStem.setAttribute("clip-path", "url(#fd-solo-clip)");
+      const soloHd = mk("g", { transform: "translate(500 190)" }, solo);
+      const soloBloom = mk("g", {}, soloHd);
+      const soloParts = head(soloBloom, 96, 10);
+
+      // ---------- Timeline (seconds, field host starts at 0) ----------
+      const tl = gsap.timeline({ paused: true });
+      // cover state (frame 0): five poppies standing; everything else hidden
+      tl.set([grid, bars, oil, solo].concat(plants.map((p) => p.val)), { opacity: 0 }, 0);
+      tl.set(seeds, { opacity: 0, scale: 0, transformOrigin: "50% 50%" }, 0);
+
+      // S1 0–4: COVER. Frame 0 is the composed first insight: copy + five poppies fully bloomed
+      // (cover_at = 0), so feeds, X and the Instagram grid show it. The opening motion starts and
+      // ends on this composition: two soft sways, nothing enters or leaves before 3.65 s.
+      plants.forEach((p) => {
+        const full = BASE - (p.cy - p.R) + 12;
+        p.growRect.setAttribute("y", BASE - full);
+        p.growRect.setAttribute("height", full + 2);
+        p.sprout.setAttribute("transform", "scale(1) rotate(0)");
+        tl.set(p.petals.concat([p.core]), { opacity: 1 }, 0);
+      });
+      [0.9, 2.6].forEach((t) =>
+        plants.forEach((p, i) =>
+          tl.to(
+            p.g,
+            {
+              rotation: i % 2 ? 1.6 : -1.6,
+              svgOrigin: p.x + " " + BASE,
+              duration: 0.35,
+              ease: "sine.inOut",
+              yoyo: true,
+              repeat: 1,
+            },
+            t + i * 0.05
+          )
+        )
+      );
+
+      // S2 4–10: China swells to the centre; the others fold into seeds; 57 of 100 seeds turn crimson
+      tl.to(plants[4].g, { x: -300, duration: 1.2, ease: "power2.inOut" }, 4.0);
+      tl.to(
+        plants[4].bloom,
+        { scale: 1.3, svgOrigin: "0 0", duration: 1.2, ease: "power2.inOut" },
+        4.0
+      );
+      tl.to(
+        plants.slice(0, 4).map((p) => p.g),
+        { scale: 0, opacity: 0, duration: 0.8, ease: "power2.in", stagger: 0.1 },
+        4.15
+      );
+      plants.slice(0, 4).forEach((p) => tl.set(p.g, { svgOrigin: p.x + " " + BASE }, 4.14));
+      tl.to(
+        seeds,
+        { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)", stagger: 0.012 },
+        4.7
+      );
+      tl.to(
+        seedsOn,
+        {
+          fill: getComputedStyle(document.documentElement).getPropertyValue("--pp-crimson").trim(),
+          duration: 0.2,
+          stagger: 0.02,
+        },
+        6.0
+      );
+
+      // S3 10–17: seeds sprout back into poppies; ranked on a 0–50M axis with values
+      tl.to(
+        seeds,
+        { opacity: 0, scale: 0, duration: 0.4, ease: "power1.in", stagger: 0.004 },
+        10.0
+      );
+      tl.to(plants[4].g, { x: 0, duration: 1.2, ease: "power2.inOut" }, 10.0);
+      tl.to(plants[4].bloom, { scale: 1, duration: 1.2, ease: "power2.inOut" }, 10.0);
+      tl.to(
+        plants.slice(0, 4).map((p) => p.g),
+        { scale: 1, opacity: 1, duration: 0.9, ease: "back.out(1.4)", stagger: 0.12 },
+        10.5
+      );
+      tl.to(grid, { opacity: 1, duration: 0.6 }, 10.9);
+      tl.to(
+        plants.map((p) => p.val),
+        { opacity: 1, duration: 0.45, ease: "power2.out", stagger: 0.2 },
+        11.3
+      );
+
+      // S4 17–24.5: the petals disperse and dissolve into the paper; the bars take their place.
+      // Each petal drifts outward from its own centre and up on a light wind, turns, shrinks and fades.
+      // Explicit SVG transforms driven by proxy tweens: every frame is a pure function of timeline time.
+      const hash = (n) => {
+        const v = Math.sin(n * 12.9898) * 43758.5453;
+        return v - Math.floor(v);
+      }; // deterministic jitter
+      plants.forEach((p, i) => {
+        p.petals.forEach((pe, k) => {
+          const back = k < 4;
+          const a = (((back ? k * 90 + 45 : (k - 4) * 90 + 8) + p.rot) * Math.PI) / 180;
+          const r0 = p.R * (back ? 0.42 : 0.4);
+          const cx = Math.sin(a) * r0,
+            cy = -Math.cos(a) * r0;
+          const j = hash(i * 8 + k + 1),
+            j2 = hash(i * 8 + k + 51);
+          const dist = p.R * (1.2 + 1.4 * j) + 40;
+          const dx = Math.sin(a) * dist + 60 + 50 * j2; // outward + a breeze to the right
+          const dy = -Math.cos(a) * dist - 70 - 90 * j; // outward + lift
+          const rot = (j2 > 0.5 ? 1 : -1) * (90 + 180 * j);
+          const st = { t: 0 };
+          const paint = () => {
+            const t = st.t,
+              e = 1 - Math.pow(1 - t, 2),
+              s = 1 - 0.55 * t;
+            pe.setAttribute(
+              "transform",
+              "translate(" +
+                dx * e +
+                " " +
+                dy * e +
+                ") rotate(" +
+                rot * t +
+                " " +
+                cx +
+                " " +
+                cy +
+                ") translate(" +
+                cx +
+                " " +
+                cy +
+                ") scale(" +
+                s +
+                ") translate(" +
+                -cx +
+                " " +
+                -cy +
+                ")"
+            );
+            pe.style.opacity = String(Math.max(0, 1 - Math.pow(t, 0.9)));
+          };
+          tl.fromTo(
+            st,
+            { t: 0 },
+            { t: 1, duration: 1.4, ease: "none", onUpdate: paint, immediateRender: false },
+            17.0 + i * 0.1 + k * 0.03
+          );
+        });
+        tl.to(p.core, { opacity: 0, duration: 0.6, ease: "power1.in" }, 17.2 + i * 0.1);
+        tl.to(p.stem, { opacity: 0, duration: 0.9, ease: "power1.in" }, 17.1 + i * 0.1);
+        tl.to(p.val, { opacity: 0, duration: 0.4 }, 17.0);
+      });
+      tl.to([grid, document.getElementById("fd-ground")], { opacity: 0, duration: 0.6 }, 17.0);
+      // hide every bar part first, so nothing shows before its own entrance
+      tl.set(barParts.lab.concat(barParts.val), { opacity: 0 }, 18.5);
+      tl.set(barParts.track.concat(barParts.fill), { scaleX: 0, transformOrigin: "0% 50%" }, 18.5);
+      tl.set(bars, { opacity: 1 }, 18.5);
+      tl.fromTo(
+        barParts.lab,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.4, stagger: 0.06, immediateRender: false },
+        18.6
+      );
+      tl.fromTo(
+        barParts.track,
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          transformOrigin: "0% 50%",
+          duration: 0.6,
+          ease: "power2.out",
+          stagger: 0.06,
+          immediateRender: false,
+        },
+        18.7
+      );
+      tl.fromTo(
+        barParts.fill,
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          transformOrigin: "0% 50%",
+          duration: 1.1,
+          ease: "power3.out",
+          stagger: 0.08,
+          immediateRender: false,
+        },
+        19.1
+      );
+      tl.fromTo(
+        barParts.val,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.4, stagger: 0.08, immediateRender: false },
+        19.8
+      );
+
+      // S5 24.5–31: bars collapse into one line; three dots drop on
+      tl.to(
+        bars,
+        { opacity: 0, scaleY: 0.05, transformOrigin: "50% 50%", duration: 0.7, ease: "power2.in" },
+        24.5
+      );
+      // hide the dots and all text first, so each appears exactly once
+      tl.set(oilVals.concat(oilLabs), { opacity: 0 }, 25.0);
+      tl.set(oilDots, { opacity: 0, y: -220 }, 25.0);
+      tl.set(oil, { opacity: 1 }, 25.0);
+      tl.fromTo(
+        oilLine,
+        { attr: { x1: 500, x2: 500 } },
+        { attr: { x1: 70, x2: 930 }, duration: 0.8, ease: "power2.out", immediateRender: false },
+        25.0
+      );
+      tl.fromTo(
+        oilDots,
+        { y: -220, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: "back.out(1.6)",
+          stagger: 0.27,
+          immediateRender: false,
+        },
+        25.6
+      );
+      tl.fromTo(
+        // All six pieces of text appear once, together, after the last dot has landed (no staggered blinking)
+        oilVals.concat(oilLabs),
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5, ease: "power1.out", immediateRender: false },
+        26.75
+      );
+
+      // S6 31–36: the line lifts into one poppy; its petals fall to the ground
+      tl.to(oil, { opacity: 0, duration: 0.4 }, 31.0);
+      tl.to(document.getElementById("fd-ground"), { opacity: 1, duration: 0.4 }, 31.0);
+      tl.set(solo, { opacity: 1 }, 31.2);
+      const growSt = { h: 0 };
+      tl.fromTo(
+        growSt,
+        { h: 0 },
+        {
+          h: 270,
+          duration: 0.8,
+          ease: "power2.out",
+          immediateRender: false,
+          onUpdate: () => {
+            soloClipRect.setAttribute("y", 500 - growSt.h);
+            soloClipRect.setAttribute("height", growSt.h + 2);
+          },
+        },
+        31.2
+      );
+      // Bloom opens about the head centre (explicit SVG scale; GSAP svgOrigin offset the head here)
+      soloBloom.setAttribute("transform", "scale(0)");
+      const bloomSt = { s: 0 };
+      tl.fromTo(
+        bloomSt,
+        { s: 0 },
+        {
+          s: 1,
+          duration: 1.3,
+          ease: "power2.inOut",
+          immediateRender: false,
+          onUpdate: () =>
+            soloBloom.setAttribute(
+              "transform",
+              "scale(" +
+                (0.12 + 0.88 * bloomSt.s).toFixed(4) +
+                ") rotate(" +
+                ((1 - bloomSt.s) * -24).toFixed(2) +
+                ")"
+            ),
+        },
+        31.5
+      );
+      // Petals fall from the head (y 190) to rest on the ground line (y 500), scattering left and right
+      // Explicit SVG transforms (translate, then rotate + shrink about each petal centre), driven by a
+      // proxy tween so every frame is a pure function of timeline time.
+      const SOLO_R = 96,
+        SOLO_ROT = 10,
+        HEAD_Y = 190,
+        REST_Y = 486;
+      soloParts.petals.forEach((p, k) => {
+        const back = k < 4;
+        const a = (((back ? k * 90 + 45 : (k - 4) * 90 + 8) + SOLO_ROT) * Math.PI) / 180;
+        const r0 = SOLO_R * (back ? 0.42 : 0.4);
+        const cx = Math.sin(a) * r0,
+          cy = -Math.cos(a) * r0; // petal centre in head coordinates
+        const side = k % 2 ? 1 : -1;
+        const dx = side * (70 + k * 32),
+          dy = REST_Y - HEAD_Y - cy - (k % 3) * 6;
+        const rot = side * (70 + k * 11);
+        const st = { t: 0 };
+        const paint = () => {
+          const t = st.t,
+            s = 1 - 0.3 * t;
+          p.setAttribute(
+            "transform",
+            "translate(" +
+              dx * t +
+              " " +
+              dy * t +
+              ") rotate(" +
+              rot * t +
+              " " +
+              cx +
+              " " +
+              cy +
+              ") translate(" +
+              cx +
+              " " +
+              cy +
+              ") scale(" +
+              s +
+              ") translate(" +
+              -cx +
+              " " +
+              -cy +
+              ")"
+          );
+        };
+        tl.fromTo(
+          st,
+          { t: 0 },
+          { t: 1, duration: 1.3, ease: "power1.in", onUpdate: paint, immediateRender: false },
+          33.2 + k * 0.09
+        );
+      });
+      // The dark centre drops last and settles between them
+      const coreSt = { t: 0 };
+      tl.fromTo(
+        coreSt,
+        { t: 0 },
+        {
+          t: 1,
+          duration: 0.9,
+          ease: "power2.in",
+          immediateRender: false,
+          onUpdate: () =>
+            soloParts.core.setAttribute(
+              "transform",
+              "translate(0 " + (REST_Y - HEAD_Y + 4) * coreSt.t + ")"
+            ),
+        },
+        34.1
+      );
+      tl.to(soloStem, { opacity: 0, duration: 0.6 }, 33.9);
+
+      window.__timelines["field"] = tl;
+    })();
+  </script>
+</template>

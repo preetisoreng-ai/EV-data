@@ -1,0 +1,117 @@
+{
+  "title": "EV transition intro (41.5 s)",
+  "content_version": 1,
+  "landing_page": "https://preetisoreng-ai.github.io/EV-data/site/intro/",
+  "landing_page_note": "Device-aware page: plays the 9:16 cut on phones and the 16:9 cut on desktop. Every post points here.",
+  "platforms": {
+    "instagram": {
+      "type": "carousel",
+      "media": [
+        "../video/renders/video-4x5.mp4",
+        "about-flowchart.png"
+      ],
+      "caption_file": "caption-instagram.txt",
+      "intro": false,
+      "hashtags": "#ElectricVehicles #EV #DataVisualization #DataStory #EnergyTransition #ClimateData #China",
+      "cover": "covers/cover-4x5.jpg",
+      "cover_at": 0,
+      "story": {
+        "media": "story/story-1-video-9x16.mp4",
+        "cover": "covers/cover-9x16.jpg",
+        "flowchart": "story/story-2-flowchart-9x16.png"
+      }
+    },
+    "x": {
+      "type": "post",
+      "media": [
+        "../video/renders/video-16x9.mp4",
+        "about-flowchart.png"
+      ],
+      "caption_file": "caption-x.txt",
+      "reply_file": "about-x.txt",
+      "max_chars": 280,
+      "cover": "covers/cover-16x9.jpg",
+      "cover_at": 0,
+      "cover_note": "X has no cover control: frame 0 is the composed cover (title, 90.6M and five bloomed poppies)."
+    },
+    "linkedin": {
+      "type": "post",
+      "media": [
+        "../video/renders/video-1x1.mp4"
+      ],
+      "first_comment_media": [
+        "about-flowchart.png"
+      ],
+      "caption_file": "caption-linkedin.txt",
+      "hashtags": "#ElectricVehicles #DataVisualization #EnergyTransition #DataStorytelling #EVs",
+      "cover": "covers/cover-1x1.jpg",
+      "cover_at": 0
+    }
+  },
+  "about": {
+    "project": "The EV transition series",
+    "brief": "an independent data-visualisation project",
+    "public_data": "Ember's Monthly EV Sales Data (CC BY 4.0), with monthly EV registrations by market (2005 to October 2026) and a latest-available EV fleet and oil-displaced snapshot",
+    "public_data_url": "https://ember-energy.org/data/ev-sales-tracker/",
+    "method": "I built it with my own approval-gated AI framework. A public dataset goes in; four reviewed artifacts come out, and a person approves each stage before the next one starts. The intro video, infographic and these posts come out of the same workflow.",
+    "website": "https://preetisoreng.com",
+    "live_app": "https://preetisoreng-ai.github.io/EV-data/",
+    "flowchart_title": "From public data\nto published story",
+    "flowchart_subtitle": "The approval-gated AI framework behind the EV transition series",
+    "steps": [
+      {
+        "name": "Public dataset in",
+        "note": "monthly EV sales + fleet impact",
+        "gate_after": "Profile + context"
+      },
+      {
+        "name": "Original analysis",
+        "note": "strongest defensible story",
+        "gate_after": "Human review + approval",
+        "short": "analysis"
+      },
+      {
+        "name": "Pressure-tested deep-dive",
+        "note": "checks claims, limits",
+        "gate_after": "Human review + approval",
+        "short": "pressure test"
+      },
+      {
+        "name": "Dashboard",
+        "note": "validated measures only",
+        "gate_after": "Human review + approval",
+        "short": "dashboard"
+      },
+      {
+        "name": "Data story web app",
+        "note": "poppy design language, live on GitHub",
+        "gate_after": "Final approval",
+        "short": "data story"
+      },
+      {
+        "name": "/artifact + /post-social",
+        "note": "video + infographic, every format"
+      }
+    ],
+    "times": [
+      {
+        "label": "Before AI",
+        "value": "2 weeks",
+        "hours": 80
+      },
+      {
+        "label": "With AI tools",
+        "value": "40 hrs",
+        "hours": 40
+      },
+      {
+        "label": "With the AI framework",
+        "value": "3 hrs",
+        "hours": 3
+      }
+    ],
+    "times_note": "Times depend on the quantity and quality of the data; AI competency and human approval may affect time."
+  },
+  "excluded_media_note": "Infographic (data art) removed from every platform at the owner's request, 2026-11-05.",
+  "about_render": "node projects/monthly-ev-impact/artifacts/social/flowchart/render-flowchart.mjs (poppy flowchart; runs the base render.mjs for the text). Use this instead of the base renderer for this post."
+}

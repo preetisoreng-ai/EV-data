@@ -1,0 +1,20 @@
+/* GENERATED from site/shared/poppy.css by tools/build-assets.mjs — do not edit */
+:root {
+  --pp-paper: #fbf1de;
+  --pp-paper-2: #f5e6cb;
+  --pp-sand: #ecd8bc;
+  --pp-line: #dcc6a8;
+  --pp-rule: #2b1d1a;
+  --pp-ink: #2b1d1a;
+  --pp-ink-2: #5e4a42;
+  --pp-muted: #7a655b;
+  --pp-crimson: #a3222b;
+  --pp-crimson-dark: #7e1820;
+  --pp-poppy: #e0463a;
+  --pp-poppy-light: #f2a08f;
+  --pp-rose: #b8645a;
+  --pp-rose-light: #d4a090;
+  --pp-serif: "Source Serif 4", "Tiempos Headline", Georgia, "Times New Roman", serif;
+  --pp-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --pp-kicker-track: 0.18em;
+}

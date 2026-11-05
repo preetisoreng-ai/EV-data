@@ -1,0 +1,10 @@
+# HyperFrames caches and previews (regenerated locally)
+.hyperframes/
+.media/
+# flowchart render temp files
+.render-*.html
+# assembled caption check files
+artifacts/social/.final-*.txt
+# local-only pages
+site/data-art/
+site/_archive/

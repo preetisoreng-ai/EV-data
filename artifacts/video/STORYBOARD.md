@@ -1,0 +1,16 @@
+# Storyboard — "The field rebuilds" (40 s)
+
+Source of every word and number: `../content.json` v1. Look: Poppy design language. Frame 0 = cover.
+
+| #   | Time        | Frame (landscape: copy left, field right · portrait: copy top, field below)                                                  | On screen to read                                                                                                                                               | Sound            |
+| --- | ----------- | ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| 1   | 0.0–4.0 s   | **Cover.** Five poppies on the ground line, smallest left → China tallest right. Fully composed at frame 0; one gentle sway. | Global EV transition / 2026 snapshot · **The shape of the global EV fleet** · **90.6M** vehicles in the supplied World total · 59 country rows                  | piano bed starts |
+| 2   | 4.0–10.0 s  | China's poppy swells to centre; the other four fold into seeds. 100 seeds lay out; 57 turn crimson.                          | China's share · **57.2%** of the supplied World fleet · 57.9% using the sum of country rows.                                                                    | soft chime       |
+| 3   | 10.0–17.0 s | Seeds sprout; five poppies stand in rank order on a 0–50M axis, values above each head (China's crimson).                    | Five largest country fleets · **77.7%** · 2.8M 3.2M 3.7M 8.8M 51.8M · Flower centre height and area show fleet size.                                            | paper rustle     |
+| 4   | 17.0–24.5 s | Stems lie down into horizontal bars; heads become end dots; two more bars draw in. China crimson, others rose.               | Sales momentum · **58.3%** China's rolling 12-month EV sales share · Norway 98.5 … India 6.1 · China's share rose strongly from 2019 to September 2026.         | rustle           |
+| 5   | 24.5–31.0 s | Bars slide together into one line; three crimson dots drop on at min, median, max.                                           | Reported oil displacement · **4.2×** spread · 2.277 · 5.315 · 9.561 · Barrels of oil equivalent per EV per year                                                 | tick per dot     |
+| 6   | 31.0–36.0 s | The line lifts into one poppy; its petals fall and settle on the ground.                                                     | **Fleet counts show where EVs are concentrated.** The source does not document the oil impact method…                                                           | bed thins        |
+| 7   | 36.0–40.0 s | Petals gather into the poppy mark. Holds 3 s.                                                                                | The shape of the global EV fleet · preetisoreng-ai.github.io/EV-data · Source / supplied monthly EV fleet-impact and sales files · pressure-tested calculations | bed resolves     |
+
+Formats: 1920x1080 master; 1080x1350, 1080x1080, 1080x1920 built from it (layout from canvas size, same content).
+Covers: frame 0 of each format → `../social/covers/cover-{16x9,4x5,1x1,9x16}.jpg`.

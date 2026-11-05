@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "locked_at": "2026-11-04T13:53:56.620Z",
+  "content_sha256": "1cc6ecbf46d99fc189190d69847a4f39aacbfa8c481b434b5b585b69cda6f2a2",
+  "sources": {
+    "data/processed/original_data.js": "fe840746b277f19b17c7d9a119888fe34672cdddfa770113cd625cc6c6b13981",
+    "data/processed/tested_data.js": "161dd309ad547ec18750dacdaf3f2339f741704642c9827e62d656a8fd39d389",
+    "data/raw/monthly_ev_fleet_impact.csv": "7d134be1c790e55407a20714ada9142bdf592778fead1eb07770cfe76e79ec72",
+    "data/raw/monthly_ev_sales.csv": "650d558a761832469506e56fe0703395464f66db03cdce5070109cc2756e66e9",
+    "site/tested/index.html": "6ae16896e2c58936edc70343b1649936a0a7d2ea4f4f387aee3bc2e5c7ccb633",
+    "workflow/reports/02-pressure-test.md": "0e3ac078e8d39fd657595a75c829c1efdb8bbbe018a6c9d4eff4512d51a478fc"
+  }
+}
