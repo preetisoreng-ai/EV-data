@@ -47,5 +47,6 @@
     "status": "left to the user (phone app)",
     "story_1": "story/story-1-video-9x16.mp4 -> link sticker to live web app",
     "story_2": "story/story-2-flowchart-9x16.png -> link sticker to preetisoreng.com"
-  }
+  },
+  "note": "Country names were added to the top-5 chart after posting (commit 2dcedc5). The X and LinkedIn videos and the scheduled Instagram video are the earlier cut without names; the landing page and story video have the names."
 }
