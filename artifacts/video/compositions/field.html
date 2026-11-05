@@ -109,6 +109,16 @@
     #root .val.hl {
       fill: var(--pp-crimson);
     }
+    #root .cname {
+      font-family: Inter, sans-serif;
+      font-weight: 700;
+      font-size: calc(var(--lab) * 0.72);
+      fill: var(--pp-ink);
+      text-anchor: middle;
+    }
+    #root .cname.hl {
+      fill: var(--pp-crimson);
+    }
     #root .track,
     #root .seed {
       fill: var(--pp-sand);
@@ -408,7 +418,18 @@
           g
         );
         val.textContent = r[2];
+        // Country name under the ground line; two-word names wrap to two lines
+        const name = mk(
+          "text",
+          { class: "cname" + (i === 4 ? " hl" : ""), x: x, y: BASE + 46, id: "fd-name-" + i },
+          g
+        );
+        r[0].split(" ").forEach((w, k) => {
+          const t = mk("tspan", { x: x, dy: k ? "1.1em" : "0" }, name);
+          t.textContent = w;
+        });
         return {
+          name,
           g,
           x,
           cy,
@@ -522,7 +543,7 @@
       // ---------- Timeline (seconds, field host starts at 0) ----------
       const tl = gsap.timeline({ paused: true });
       // cover state (frame 0): five poppies standing; everything else hidden
-      tl.set([grid, bars, oil, solo].concat(plants.map((p) => p.val)), { opacity: 0 }, 0);
+      tl.set([grid, bars, oil, solo].concat(plants.map((p) => p.val), plants.map((p) => p.name)), { opacity: 0 }, 0);
       tl.set(seeds, { opacity: 0, scale: 0, transformOrigin: "50% 50%" }, 0);
 
       // S1 0–4: COVER. Frame 0 is the composed first insight: copy + five poppies fully bloomed
@@ -599,6 +620,11 @@
         { opacity: 1, duration: 0.45, ease: "power2.out", stagger: 0.2 },
         11.3
       );
+      tl.to(
+        plants.map((p) => p.name),
+        { opacity: 1, duration: 0.45, ease: "power2.out", stagger: 0.2 },
+        11.3
+      );
 
       // S4 17–24.5: the petals disperse and dissolve into the paper; the bars take their place.
       // Each petal drifts outward from its own centre and up on a light wind, turns, shrinks and fades.
@@ -660,7 +686,7 @@
         });
         tl.to(p.core, { opacity: 0, duration: 0.6, ease: "power1.in" }, 17.2 + i * 0.1);
         tl.to(p.stem, { opacity: 0, duration: 0.9, ease: "power1.in" }, 17.1 + i * 0.1);
-        tl.to(p.val, { opacity: 0, duration: 0.4 }, 17.0);
+        tl.to([p.val, p.name], { opacity: 0, duration: 0.4 }, 17.0);
       });
       tl.to([grid, document.getElementById("fd-ground")], { opacity: 0, duration: 0.6 }, 17.0);
       // hide every bar part first, so nothing shows before its own entrance
